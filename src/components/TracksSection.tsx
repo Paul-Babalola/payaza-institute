@@ -86,12 +86,16 @@ const TracksSection = () => {
                   display: "flex",
                   gap: "2rem",
                   alignItems: "center",
-                  marginBottom: "1rem",
+                  marginBottom: "2rem",
                 }}
               >
                 <span style={{ display: "flex", alignItems: "center" }}>
                   <img
-                    src={require("../assets/Calendar.png")}
+                    src={require(`../assets/${
+                      currentTrack.bgClass === "product-bg"
+                        ? "Calendar-white.png"
+                        : "Calendar.png"
+                    }`)}
                     alt="calendar"
                     style={{ width: 20, height: 20, marginRight: "0.5rem" }}
                   />
@@ -100,7 +104,11 @@ const TracksSection = () => {
                 {currentTrack.projects && (
                   <span style={{ display: "flex", alignItems: "center" }}>
                     <img
-                      src={require("../assets/Group.png")}
+                      src={require(`../assets/${
+                        currentTrack.bgClass === "product-bg"
+                          ? "Group-white.png"
+                          : "Group.png"
+                      }`)}
                       alt="group"
                       style={{ width: 15, height: 15, marginRight: "0.5rem" }}
                     />
@@ -111,7 +119,11 @@ const TracksSection = () => {
               {currentTrack.details.map((item, idx) => (
                 <li key={idx} style={{ display: "flex", alignItems: "center" }}>
                   <img
-                    src={require("../assets/circle-tick.png")}
+                    src={require(`../assets/${
+                      currentTrack.bgClass === "product-bg"
+                        ? "circle-tick-white.png"
+                        : "circle-tick.png"
+                    }`)}
                     alt="tick"
                     style={{ width: 17, height: 17, marginRight: "0.5rem" }}
                   />

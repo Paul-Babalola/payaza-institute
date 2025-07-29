@@ -33,7 +33,6 @@
   left: 0;
   width: 100%;
   height: 3px;
-  background: #4d9944;
   border-radius: 1px;
 }
 .subtitle {
@@ -62,7 +61,7 @@
 }
 
 .apply-btn {
-  padding: 0.75rem 0.5rem;
+  padding: 1rem 0.5rem;
   font-size: 16px;
   font-weight: 500;
   border: none;
@@ -71,11 +70,17 @@
   color: white;
   cursor: pointer;
   transition: background 0.3s ease;
-  width: 30%;
+  width: 28%;
+  margin-top: 1.5rem;
 }
 
 .apply-btn:hover {
   background: linear-gradient(90deg, #9c48c4, #550077);
+}
+
+.product-bg .apply-btn:hover {
+  background: linear-gradient(90deg, #c5e5c1, #3ea732);
+  color: black;
 }
 
 .image-section {
@@ -132,10 +137,11 @@
   order: 1;
 }
 .engineering-bg .track-description {
-  color: "#5A51FF";
+  color: #5a515f;
+  width: 510px;
 }
 .career-bg .track-description {
-  color: "#5A515F";
+  color: #5a515f;
 }
 .product-bg .track-description {
   color: "white";
@@ -160,6 +166,14 @@
   gap: 1rem;
   padding: 0 1rem;
   border-radius: 8px;
+}
+
+.product-bg .trackers::after,
+.product-bg .section-tab.active::after {
+  background: #fff;
+}
+.product-bg .track-header-row {
+  flex-direction: row-reverse;
 }
 
 /* Track header and page tracker styles */
@@ -211,6 +225,19 @@
   color: #9ca3af;
 }
 
+.product-bg .subtitle {
+  display: flex;
+  text-align: left;
+  margin-left: 0;
+  margin-right: 17rem;
+  color: #4d9944;
+}
+
+.product-bg .apply-btn {
+  background: linear-gradient(90deg, #80ff72 0%, #4d9944 100%);
+  color: black;
+}
+
 .engineering-bg .tracker-number,
 .engineering-bg .tracker-label {
   color: #4d9944;
@@ -223,6 +250,7 @@
 .product-bg .tracker-label {
   color: #fff;
 }
+
 /* Import Roobert and Rebond Grotesque fonts */
 @font-face {
   font-family: "Roobert Bold";
@@ -278,11 +306,12 @@
 
 .tracks-section {
   color: white;
-  height: 1080px;
-  width: 96vw;
+  height: 800px;
+  width: 96.3vw;
   max-width: 1800px;
+  justify-content: center;
   margin: 0;
-  padding: 2rem 2rem 0 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   justify-content: center;
   align-items: flex-start;
   transition: background 1s ease-in-out;
@@ -359,8 +388,9 @@
 }
 
 .track-info li {
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  font-family: "Roobert", sans-serif;
 }
 
 .track-description {
@@ -368,7 +398,7 @@
   line-height: 150%;
   font-weight: 400;
   font-family: "Roobert", sans-serif;
-  width: 530px;
+  width: 490px;
 }
 
 .image-section {
@@ -425,13 +455,17 @@
 }
 
 .engineering-bg .track-description {
-  color: "#5A51FF";
+  color: #5a515f;
 }
 
 .career-bg .track-description {
-  color: "#5A515F";
+  color: #5a515f;
 }
 
 .product-bg .track-description {
   color: "white";
+}
+
+.career-bg .track-info {
+  color: #5a515f;
 }

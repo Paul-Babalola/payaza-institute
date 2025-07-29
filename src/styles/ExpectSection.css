@@ -1,13 +1,14 @@
 .expect-section {
   width: 100vw;
+  height: 708px;
   display: flex;
   justify-content: center;
-  background: linear-gradient(180deg, #2d0b4f 60%, #1a0033 100%);
+  background: linear-gradient(180deg, #2d0b4f 60%, #1a0033 150%);
   align-items: flex-start;
-  padding: 4rem 0 3rem 0;
+  padding: 5rem 0 0rem 0;
   position: relative;
   z-index: 3;
-  gap: 10rem;
+  gap: 7rem;
   margin: 0 auto;
   font-family: "Roobert", "Roboto", "Inter", Arial, sans-serif;
 }
@@ -25,7 +26,7 @@
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 2px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   text-transform: uppercase;
   font-style: italic;
 }
@@ -36,8 +37,8 @@
   width: 100%;
 }
 .expect-list li {
-  margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -50,7 +51,11 @@
   bottom: 0;
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, #80ff72 5%, #0a2507 100%);
+  background: linear-gradient(90deg, #552ba3 5%, #5a0884 100%);
+}
+
+.expect-list li.active::after {
+  background: linear-gradient(90deg, #80ff72 0%, #0a2507 100%);
 }
 .expect-label {
   color: #fff;
@@ -95,7 +100,7 @@
 }
 .expect-image {
   width: 589px;
-  height: 500px;
+  height: 564px;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);

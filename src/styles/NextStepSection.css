@@ -2,10 +2,11 @@
 
 .next-step-section {
   width: 100vw;
-  background: linear-gradient(180deg, #2d0b4f 60%, #1a0033 100%);
+  background: linear-gradient(0deg, #2d0b4f 60%, #1a0033 100%);
   padding: 5rem 0 3rem 0;
   position: relative;
-  z-index: 2;
+  z-index: -2;
+  height: 758px;
   font-family: "Roboto", "Inter", Arial, sans-serif;
 }
 

@@ -14,19 +14,53 @@ const ExpectSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
     <section className="expect-section">
+      <img
+        src={require("../assets/RibbonExpect.png")}
+        alt="Ribbon"
+        className="expect-ribbon"
+        style={{
+          position: "absolute",
+          top: "6.2%",
+          left: "47%",
+          transform: "translate(-50%, -50%)",
+          opacity: 1.0,
+          zIndex: 0,
+          width: "97vw",
+          maxWidth: "100%",
+          pointerEvents: "none",
+        }}
+      />
       <div className="expect-content">
         <h3 className="expect-title">WHAT TO EXPECT</h3>
         <ul className="expect-list">
           {items.map((label, idx) => (
-            <li key={label}>
+            <li
+              key={label}
+              className={openIndex === idx ? "active" : ""}
+              style={{ textAlign: "left" }}
+            >
               <div
                 className="expect-label-row"
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  textAlign: "left",
+                  alignItems: "flex-start",
+                  display: "flex",
+                }}
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
               >
-                <span className="expect-label">{label}</span>
+                <span className="expect-label" style={{ textAlign: "left" }}>
+                  {label}
+                </span>
               </div>
-              {openIndex === idx && <span className="expect-desc">{desc}</span>}
+              {openIndex === idx && (
+                <span
+                  className="expect-desc"
+                  style={{ textAlign: "left", display: "block" }}
+                >
+                  {desc}
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -48,7 +82,7 @@ const ExpectSection: React.FC = () => {
           </svg>
         </a>
       </div>
-      <div className="expect-image-container">
+      <div className="expect-image-container" style={{ position: "relative" }}>
         <img
           src={require("../assets/Student.jpg")}
           alt="Student"

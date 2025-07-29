@@ -2,6 +2,7 @@
   background: linear-gradient(135deg, #2d0b4f 60%, #1a0033 100%);
   color: #fff;
   padding: 3rem 0 2rem 0;
+  height: 600px;
   position: relative;
   z-index: 2;
   font-family: "Roboto", "Inter", Arial, sans-serif;
@@ -127,8 +128,8 @@
   margin-right: auto;
   font-size: 14px;
   color: #f4f0f8;
-  margin-bottom: 7rem;
 }
+
 .footer-bottom-links a {
   color: #cfc3e6;
   margin-left: 2rem;
