@@ -1,0 +1,217 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
+/* If Rebond Grotesque is not available via Google Fonts, you must add it manually to your project and use @font-face below. */
+/* Example:
+@font-face {
+  font-family: 'Rebond Grotesque';
+  src: url('../assets/fonts/RebondGrotesque-Regular.woff2') format('woff2'),
+       url('../assets/fonts/RebondGrotesque-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+*/
+@font-face {
+  font-family: "Rebond Grotesque";
+  src: url("/public/fonts/rebond-grotesque-font-family-1753627987-0/ESRebondGrotesqueTRIAL-Medium-BF6618904088566.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rebond Grotesque";
+  src: url("/public/fonts/rebond-grotesque-font-family-1753627987-0/ESRebondGrotesqueTRIAL-Light-BF66189040e6001.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0rem;
+}
+
+.navbar-container {
+  width: 100vw;
+  max-width: 1440px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 5%;
+  height: 16px;
+  padding: 0 4rem;
+  box-sizing: border-box;
+}
+
+.navbar-links {
+  margin-top: -20px;
+  margin-left: -10%;
+}
+
+.cta-secondary:hover {
+  color: #7c3aed;
+}
+
+.cta-primary {
+  display: inline-block;
+  border-radius: 2rem;
+  color: #22c55e;
+  padding: 0.85rem 1.2rem;
+  font-size: 14px;
+  border-radius: 2rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: #22c55e solid 1px;
+  margin-bottom: 2rem;
+}
+
+.cta-primary:hover {
+  cursor: pointer;
+}
+
+.cta-secondary {
+  display: inline-block;
+  color: #fff;
+  padding: 0.75rem 1.2rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.cta-secondary:hover {
+  cursor: pointer;
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden; /* prevent overflow from rotated image */
+  padding: 4rem 2rem 0 2rem;
+  background: linear-gradient(135deg, #2d0b4f 60%, #1a0033 100%);
+  color: #fff;
+  clip-path: inset(0 0 200px 0);
+  margin-bottom: -13rem;
+  /* top | right | bottom | left */
+}
+
+.cover-image {
+  position: absolute;
+  left: -11%;
+  width: 130%;
+  opacity: 6;
+  transform: rotate(100.3deg);
+  pointer-events: none; /* So it doesn't block any clicks */
+  z-index: 0;
+}
+
+.hero-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-top {
+  position: relative;
+  z-index: 1;
+}
+
+.robot-image {
+  width: 420px;
+  margin-top: 5%;
+  max-width: 100%;
+  height: auto;
+  margin: 5rem 7rem;
+}
+
+.hero-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  margin-top: -8rem;
+}
+
+.apply {
+  display: flex;
+  background: linear-gradient(90deg, #80ff72 0%, #4d9944 100%);
+  color: black;
+  padding: 1.1rem 1.5rem;
+  font-size: 14px;
+  border-radius: 2rem;
+  font-weight: bolder;
+  text-decoration: none;
+  width: 150px;
+  cursor: pointer;
+  height: 57px;
+  gap: 9px;
+  margin-bottom: 30%;
+  transition: background 0.3s ease;
+}
+
+.arrow-icon {
+  width: 16px; /* Adjust size as needed */
+  height: 16px;
+  object-fit: contain;
+}
+
+.hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.logo {
+  width: 316px;
+  height: 32px;
+  align-items: center;
+  justify-items: center;
+  margin-top: -20px;
+}
+.headline {
+  font-size: 70px;
+  font-weight: 200;
+  height: 143px;
+  width: 790px;
+  letter-spacing: -2%;
+  font-style: normal;
+  font-family: "Rebond Grotesque", sans-serif;
+}
+
+.highlight {
+  color: #bc4af6;
+  font-weight: bold;
+  font-style: italic;
+}
+.subheadline {
+  font-size: 24px;
+  margin-bottom: 2rem;
+  color: #cfc3e6;
+  margin-top: -1rem;
+  width: 500px;
+  line-height: 150%;
+}
+
+.about {
+  border-radius: 1rem;
+  padding: 1.2rem 1rem;
+  margin-top: 2rem;
+}
+.about h3 {
+  color: #22c55e;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.about p {
+  color: #dacce0;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 150%;
+  width: 360px;
+}

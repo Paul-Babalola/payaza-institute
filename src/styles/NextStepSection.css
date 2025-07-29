@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
+
+.next-step-section {
+  width: 100vw;
+  background: linear-gradient(180deg, #2d0b4f 60%, #1a0033 100%);
+  padding: 5rem 0 3rem 0;
+  position: relative;
+  z-index: 2;
+  font-family: "Roboto", "Inter", Arial, sans-serif;
+}
+
+.next-step-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 4rem;
+}
+.next-step-highlight {
+  color: #bc4af6;
+  font-weight: 700;
+  font-style: italic;
+}
+.next-step-highlight-alt {
+  color: #fff;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.next-step-steps {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4rem;
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.next-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 220px;
+}
+
+.next-step-dot-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 32px;
+  margin-bottom: 1.5rem;
+}
+.next-step-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #bc4af6;
+  box-shadow: 0 0 0 4px #2d0b4f;
+  z-index: 2;
+}
+.next-step-line {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, #bc4af6 0%, #6eea6b 100%);
+  margin-left: -2px;
+  z-index: 1;
+}
+
+.next-step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.next-step-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.next-step-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+.next-step-desc {
+  font-size: 1rem;
+  color: #cfc3e6;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  max-width: 220px;
+}
+
+@media (max-width: 900px) {
+  .next-step-steps {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .next-step-item {
+    min-width: 0;
+    width: 90vw;
+  }
+  .next-step-line {
+    width: 60vw;
+  }
+}
