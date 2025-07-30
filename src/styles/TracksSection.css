@@ -428,6 +428,10 @@
   z-index: -1;
 }
 
+.product-bg .track-image {
+  z-index: -1;
+}
+
 .product-bg {
   background: linear-gradient(135deg, #1a0033 0%, #1a0033 100%);
   color: #fff;

@@ -27,7 +27,7 @@ const steps = [
 
 const NextStepSection: React.FC = () => {
   return (
-    <section className="next-step-section">
+    <section className="next-step-section" id="howitworks">
       <h2 className="title">
         Transform your <span className="highlight-career">Career</span> in a few{" "}
         <span className="highlight-steps">Steps</span>

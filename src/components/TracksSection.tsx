@@ -62,7 +62,7 @@ const TracksSection = () => {
   }, []);
 
   return (
-    <section className={`tracks-section ${currentTrack.bgClass}`}>
+    <section className={`tracks-section ${currentTrack.bgClass}`} id="tracks">
       <div className="track-header">
         <div className="track-header-row">
           <p className="subtitle">{currentTrack.subtitle}</p>
@@ -177,23 +177,22 @@ const TracksSection = () => {
             )}
             {currentTrack.bgClass === "product-bg" && (
               <img
-                src={require("../assets/Ribbon.png")}
+                src={require("../assets/productribbon.png")}
                 alt="Product Ribbon"
                 className="product-ribbon"
                 style={{
                   position: "absolute",
-                  top: 0,
-                  left: 0,
+                  top: "-30.5rem",
+                  left: "-5rem",
+                  transform: "translateX(-50%)",
                   width: "100vw",
-                  maxWidth: "100%",
-                  transform: "none",
-                  opacity: 1,
+                  height: "auto",
                   zIndex: 0,
+                  opacity: 1,
                   pointerEvents: "none",
                 }}
               />
             )}
-
             <img
               src={currentTrack.imgSrc}
               alt={currentTrack.imgAlt}

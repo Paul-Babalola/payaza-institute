@@ -7,8 +7,13 @@ const items = [
   "Weekly Office Hours",
   "Capstone Project",
 ];
-const desc =
-  "Your peace of mind is our priority – fortified protection for your financial data";
+
+const descriptions = [
+  "Master Africa's fintech ecosystem through curated content that builds strategic and technical skills. Learn on your schedule with interactive modules and real case studies.",
+  "Attend sessions with CEOs and leaders from across Africa, North America, and Europe. Get insider insights on market trends and strategic challenges at the frontier.",
+  "Leverage direct access to practitioners implementing fintech solutions across Africa. Get answers to complex challenges and learn from active industry professionals.",
+  "Apply your learning to real-world fintech challenges. Build a portfolio showcasing your expertise while solving actual industry problems.",
+];
 
 const ExpectSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -58,13 +63,13 @@ const ExpectSection: React.FC = () => {
                   className="expect-desc"
                   style={{ textAlign: "left", display: "block" }}
                 >
-                  {desc}
+                  {descriptions[idx]}
                 </span>
               )}
             </li>
           ))}
         </ul>
-        <a href="#apply" className="expect-cta">
+        <a href="/apply" className="expect-cta">
           Start your Application
           <svg
             width="14"
