@@ -42,22 +42,34 @@
   font-family: "Rebond Grotesque Semi-Bold", "Inter", Arial, sans-serif;
 }
 
-.sponsorship-logos {
+.sponsorship-logos-outer {
+  width: 100vw;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.sponsorship-logos-inner {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
   gap: 4rem;
-  width: 100vw;
-  padding: 0 2vw;
-  overflow-x: hidden;
-  margin-bottom: 1rem;
+  width: max-content;
+  animation: scroll-logos 30s linear infinite;
+}
+
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .sponsorship-logo {
   height: 32px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
   margin: 0 0rem;
 }
 

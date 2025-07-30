@@ -1,57 +1,84 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../../styles/ApplicationForm.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../styles/ApplicationForm.css";
 
 const Background: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    currentPosition: '',
-    yearsOfExperience: '',
-    educationLevel: '',
-    fieldOfStudy: '',
-    currentCompany: '',
-    location: '',
+    currentPosition: "",
+    yearsOfExperience: "",
+    educationLevel: "",
+    fieldOfStudy: "",
+    currentCompany: "",
+    location: "",
     technicalSkills: [] as string[],
-    tools: [] as string[]
+    tools: [] as string[],
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const removeSkill = (skillToRemove: string, type: 'technicalSkills' | 'tools') => {
-    setFormData(prev => ({
+  const removeSkill = (
+    skillToRemove: string,
+    type: "technicalSkills" | "tools"
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [type]: prev[type].filter(skill => skill !== skillToRemove)
+      [type]: prev[type].filter((skill) => skill !== skillToRemove),
     }));
   };
 
   const handleNext = () => {
-    navigate('/apply/motivation-goals');
+    navigate("/apply/motivation-goals");
   };
 
   const handlePrevious = () => {
-    navigate('/apply/track-selection');
+    navigate("/apply/track-selection");
   };
 
   const handleExit = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
     <div className="application-form-container">
       {/* Progress Bar */}
       <div className="progress-bar">
-        <div className="progress-bar-fill" style={{ width: '75%' }}></div>
+        <div className="progress-bar-fill" style={{ width: "75%" }}></div>
       </div>
 
       {/* Header */}
       <div className="form-header">
-        <div className="exit-section" onClick={handleExit} style={{ cursor: 'pointer' }}>
-          <svg className="close-icon" width="16" height="24" viewBox="0 0 16 24" fill="none">
-            <path d="M4 15L11 8" stroke="#3E3841" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M11 15L4 8" stroke="#323232" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <div
+          className="exit-section"
+          onClick={handleExit}
+          style={{ cursor: "pointer" }}
+        >
+          <svg
+            className="close-icon"
+            width="16"
+            height="24"
+            viewBox="0 0 16 24"
+            fill="none"
+          >
+            <path
+              d="M4 15L11 8"
+              stroke="#3E3841"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M11 15L4 8"
+              stroke="#323232"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           <div className="separator"></div>
           <span className="exit-text">Exit Application</span>
@@ -95,7 +122,9 @@ const Background: React.FC = () => {
         <div className="main-form">
           <div className="form-section-header">
             <h2 className="section-title">Background</h2>
-            <p className="section-subtitle">Tell us a bit about your background</p>
+            <p className="section-subtitle">
+              Tell us a bit about your background
+            </p>
           </div>
 
           <form className="form-fields">
@@ -106,6 +135,7 @@ const Background: React.FC = () => {
                 name="currentPosition"
                 value={formData.currentPosition}
                 onChange={handleInputChange}
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -116,6 +146,7 @@ const Background: React.FC = () => {
                 name="yearsOfExperience"
                 value={formData.yearsOfExperience}
                 onChange={handleInputChange}
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -134,8 +165,20 @@ const Background: React.FC = () => {
                     <option value="Master's">Master's</option>
                     <option value="PhD">PhD</option>
                   </select>
-                  <svg className="dropdown-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M8 10L12 14L16 10" stroke="#0F0E10" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    className="dropdown-arrow"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M8 10L12 14L16 10"
+                      stroke="#0F0E10"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -157,6 +200,7 @@ const Background: React.FC = () => {
                 name="currentCompany"
                 value={formData.currentCompany}
                 onChange={handleInputChange}
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -167,6 +211,7 @@ const Background: React.FC = () => {
                 name="location"
                 value={formData.location}
                 onChange={handleInputChange}
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -179,19 +224,48 @@ const Background: React.FC = () => {
                       <button
                         type="button"
                         className="remove-skill"
-                        onClick={() => removeSkill(skill, 'technicalSkills')}
+                        onClick={() => removeSkill(skill, "technicalSkills")}
                       >
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M8.18 3.82L4.82 7.18" stroke="#F4F3F5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M8.18 7.18L4.82 3.82" stroke="#F4F3F5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <path
+                            d="M8.18 3.82L4.82 7.18"
+                            stroke="#F4F3F5"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M8.18 7.18L4.82 3.82"
+                            stroke="#F4F3F5"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </button>
                       <span>{skill}</span>
                     </div>
                   ))}
                 </div>
-                <svg className="dropdown-arrow skills-dropdown" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M8 10L12 14L16 10" stroke="#0F0E10" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  className="dropdown-arrow skills-dropdown"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M8 10L12 14L16 10"
+                    stroke="#0F0E10"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
             </div>
@@ -205,29 +279,70 @@ const Background: React.FC = () => {
                       <button
                         type="button"
                         className="remove-skill"
-                        onClick={() => removeSkill(tool, 'tools')}
+                        onClick={() => removeSkill(tool, "tools")}
                       >
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                          <path d="M8.18 3.82L4.82 7.18" stroke="#F4F3F5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M8.18 7.18L4.82 3.82" stroke="#F4F3F5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <path
+                            d="M8.18 3.82L4.82 7.18"
+                            stroke="#F4F3F5"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M8.18 7.18L4.82 3.82"
+                            stroke="#F4F3F5"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </button>
                       <span>{tool}</span>
                     </div>
                   ))}
                 </div>
-                <svg className="dropdown-arrow skills-dropdown" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M8 10L12 14L16 10" stroke="#0F0E10" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  className="dropdown-arrow skills-dropdown"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M8 10L12 14L16 10"
+                    stroke="#0F0E10"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
             </div>
 
             <div className="form-actions">
-              <button type="button" className="previous-btn" onClick={handlePrevious}>Previous</button>
+              <button
+                type="button"
+                className="previous-btn"
+                onClick={handlePrevious}
+              >
+                Previous
+              </button>
               <button type="button" className="next-btn" onClick={handleNext}>
                 Next
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M8.33203 13.3327L11.6654 9.99935L8.33203 6.66602" stroke="#F4F3F5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path
+                    d="M8.33203 13.3327L11.6654 9.99935L8.33203 6.66602"
+                    stroke="#F4F3F5"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </button>
             </div>

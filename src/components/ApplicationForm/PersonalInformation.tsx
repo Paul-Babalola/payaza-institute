@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/ApplicationForm.css";
 
 const PersonalInformation: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    location: string;
+    githubUrl: string;
+    portfolioUrl: string;
+    resume: File | null;
+  }>({
     firstName: "Sally",
     lastName: "Blue",
     email: "sallyblue@gmail.com",
@@ -12,6 +22,8 @@ const PersonalInformation: React.FC = () => {
     portfolioUrl: "",
     resume: null,
   });
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -19,8 +31,42 @@ const PersonalInformation: React.FC = () => {
   };
 
   const handleFileUpload = () => {
-    // File upload logic would go here
-    console.log("File upload clicked");
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({ ...prev, resume: file }));
+    }
+  };
+
+  // Validation: all required fields must be filled
+  const isFormValid =
+    formData.firstName.trim() &&
+    formData.lastName.trim() &&
+    formData.email.trim() &&
+    formData.phoneNumber.trim() &&
+    formData.location.trim() &&
+    formData.resume;
+
+  const handleNext = () => {
+    if (isFormValid) {
+      // Save to localStorage (or context/global state)
+      const { resume, ...rest } = formData;
+      localStorage.setItem("personalInformation", JSON.stringify(rest));
+      // Optionally save file name
+      if (resume) {
+        localStorage.setItem("resumeName", resume.name);
+      }
+      navigate("/apply/track-selection");
+    }
+  };
+
+  const handleExit = () => {
+    navigate("/");
   };
 
   return (
@@ -32,7 +78,11 @@ const PersonalInformation: React.FC = () => {
 
       {/* Header */}
       <div className="form-header">
-        <div className="exit-section">
+        <div
+          className="exit-section"
+          onClick={handleExit}
+          style={{ cursor: "pointer" }}
+        >
           <svg
             className="close-icon"
             width="16"
@@ -55,10 +105,10 @@ const PersonalInformation: React.FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <div className="separator"></div>
-          <span className="exit-text">Exit Verification</span>
+          <span className="exit-text">Exit Application</span>
         </div>
-        <div className="step-info">
+        <div className="separator"></div>
+        <div className="step-info" style={{ marginLeft: "-10rem" }}>
           <div className="step-details">
             <div className="step-label">STEP 1/4</div>
             <div className="step-title">Personal Information</div>
@@ -131,6 +181,7 @@ const PersonalInformation: React.FC = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -179,6 +230,7 @@ const PersonalInformation: React.FC = () => {
                 name="location"
                 value={formData.location}
                 onChange={handleInputChange}
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -190,6 +242,7 @@ const PersonalInformation: React.FC = () => {
                 value={formData.githubUrl}
                 onChange={handleInputChange}
                 placeholder="https://"
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -201,6 +254,7 @@ const PersonalInformation: React.FC = () => {
                 value={formData.portfolioUrl}
                 onChange={handleInputChange}
                 placeholder="https://"
+                style={{ width: "54.7vw" }}
               />
             </div>
 
@@ -252,6 +306,18 @@ const PersonalInformation: React.FC = () => {
                 >
                   Upload File
                 </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  onChange={handleFileChange}
+                  accept=".pdf"
+                />
+                {formData.resume && (
+                  <span style={{ marginLeft: "1rem", color: "#4d9944" }}>
+                    {(formData.resume as File).name}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -259,7 +325,12 @@ const PersonalInformation: React.FC = () => {
               <button type="button" className="cancel-btn">
                 Cancel
               </button>
-              <button type="button" className="next-btn disabled">
+              <button
+                type="button"
+                className={`next-btn${!isFormValid ? " disabled" : ""}`}
+                onClick={handleNext}
+                disabled={!isFormValid}
+              >
                 Next
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path
