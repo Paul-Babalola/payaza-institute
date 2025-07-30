@@ -10,7 +10,7 @@
   font-family: "Roboto", "Inter", Arial, sans-serif;
 }
 
-.title {
+.next-step-section .title {
   font-size: 70px;
   font-weight: 400;
   text-align: left;
@@ -159,7 +159,7 @@
   width: 208px;
 }
 
-.step-number {
+.next-step-section .step-number {
   font-size: 52px;
   font-family: "Roobert Semi-Bold", sans-serif;
   font-weight: 600;

@@ -317,6 +317,7 @@
   transition: background 1s ease-in-out;
   font-family: "Roobert", "Inter", sans-serif;
   margin-top: 0 !important;
+  overflow: hidden;
 }
 
 .section-tabs {
@@ -420,7 +421,11 @@
 .engineering-bg {
   background-color: #f4f0f8;
   color: #1e1b4b;
-  z-index: 2;
+  z-index: 0;
+}
+
+.engineering-bg .track-image {
+  z-index: -1;
 }
 
 .product-bg {

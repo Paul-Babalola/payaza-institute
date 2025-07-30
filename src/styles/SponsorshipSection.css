@@ -1,0 +1,77 @@
+/* Add background image styling */
+.sponsorship-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sponsorship-section {
+  width: 100vw;
+  background: linear-gradient(90deg, #1a0033 0%, #370c4d 100%);
+  padding: 0;
+  margin: 0;
+  position: relative;
+  min-height: 203px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Ensure title and logos are above the background */
+.sponsorship-title,
+.sponsorship-logos {
+  position: relative;
+  z-index: 1;
+}
+.sponsorship-title {
+  color: #4d9944;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+  font-style: italic;
+  font-family: "Rebond Grotesque Semi-Bold", "Inter", Arial, sans-serif;
+}
+
+.sponsorship-logos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  width: 100vw;
+  padding: 0 2vw;
+  overflow-x: hidden;
+  margin-bottom: 1rem;
+}
+
+.sponsorship-logo {
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  margin: 0 0rem;
+}
+
+@media (max-width: 900px) {
+  .sponsorship-logos {
+    gap: 2rem;
+    padding: 0 1vw;
+  }
+  .sponsorship-logo {
+    height: 28px;
+    margin: 0 0.7rem;
+  }
+  .sponsorship-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+}

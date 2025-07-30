@@ -1,8 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/HeroSection.css";
 import Navbar from "./Navbar";
 
-const HeroSection: React.FC = () => (
+const HeroSection: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleApplyNow = () => {
+    navigate('/apply');
+  };
+
+  return (
   <section className="hero-section">
     <img
       src={require("../assets/BG.png")}
@@ -42,7 +50,7 @@ const HeroSection: React.FC = () => (
             Transform the way you learn fintech with intelligent tools designed
             to accelerate your career journey.
           </p>
-          <button className="apply">
+          <button className="apply" onClick={handleApplyNow}>
             Apply Now
             <img
               src={require("../assets/Arrow.png")}
@@ -68,6 +76,7 @@ const HeroSection: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default HeroSection;

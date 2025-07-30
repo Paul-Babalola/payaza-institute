@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/TracksSection.css";
+import { useNavigate } from "react-router-dom";
 
 const tracks = [
   {
@@ -50,6 +51,7 @@ const tracks = [
 const TracksSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const currentTrack = tracks[activeIndex];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -131,14 +133,72 @@ const TracksSection = () => {
                 </li>
               ))}
             </ul>
-            <button className="apply-btn">Apply Now →</button>
+            <button className="apply-btn" onClick={() => navigate("/apply")}>
+              Apply Now →
+            </button>
           </div>
 
-          <div className="image-section">
+          <div className="image-section" style={{ position: "relative" }}>
+            {currentTrack.bgClass === "career-bg" && (
+              <img
+                src={require("../assets/careerribbon.png")}
+                alt="Career Ribbon"
+                className="career-ribbon"
+                style={{
+                  position: "absolute",
+                  top: "-8.5rem",
+                  left: "10rem",
+                  transform: "translateX(-50%)",
+                  width: "50vw",
+                  height: "auto",
+                  zIndex: 0,
+                  pointerEvents: "none",
+                }}
+              />
+            )}
+            {currentTrack.bgClass === "engineering-bg" && (
+              <img
+                src={require("../assets/Ribbon.png")}
+                alt="Engineering Ribbon"
+                className="engineering-ribbon"
+                style={{
+                  position: "absolute",
+                  paddingTop: "2rem",
+                  top: "-22rem",
+                  left: "42.5rem",
+                  transform: "translateX(-50%) scaleX(-1) scaleY(-1)",
+                  width: "90vw",
+                  maxWidth: 2000,
+                  opacity: 1,
+                  zIndex: 2,
+                  pointerEvents: "none",
+                }}
+              />
+            )}
+            {currentTrack.bgClass === "product-bg" && (
+              <img
+                src={require("../assets/Ribbon.png")}
+                alt="Product Ribbon"
+                className="product-ribbon"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100vw",
+                  maxWidth: "100%",
+                  transform: "none",
+                  opacity: 1,
+                  zIndex: 0,
+                  pointerEvents: "none",
+                }}
+              />
+            )}
+
             <img
               src={currentTrack.imgSrc}
               alt={currentTrack.imgAlt}
               className="track-image"
+              style={{ position: "relative", zIndex: 1 }}
             />
           </div>
         </div>

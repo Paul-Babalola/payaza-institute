@@ -1,0 +1,1170 @@
+/* CSS Variables matching the design system */
+:root {
+  --Grays-50: #F4F3F5;
+  --Primary-Indigo-300: #8F66A3;
+  --Primary-Indigo-50: #F4F0F8;
+  --Grays-100: #DEDAE1;
+  --Gray-100: #E6E7EC;
+  --Grays-700: #3E3841;
+  --Grays-500: #776D7D;
+  --Grays-800: #211E23;
+  --Primary-Indigo-100: #DACCE0;
+  --Primary-Indigo-500: #360E54;
+  --Backgrounds-Background-White: #FFF;
+  --Grays-400: #938999;
+  --Grays-300: #ACA3B1;
+  --Primary-Indigo-400: #693385;
+  --Primary-Green-500: #80FF72;
+  --Primary-Green-800: #33662E;
+  --Primary-Green-700: #4D9944;
+  --Primary-Indigo-900: #0E0014;
+  --Grays-600: #5A515F;
+}
+
+/* Base Application Form Container */
+.application-form-container {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--Grays-50);
+  position: relative;
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+/* Background SVG styling */
+.application-form-container::before {
+  content: '';
+  position: absolute;
+  top: 262px;
+  left: -37px;
+  width: 1927px;
+  height: 604px;
+  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='606' viewBox='0 0 1440 606' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath opacity='0.44' d='M1889.85 386.671C1890.39 386.586 1890.9 386.959 1890.99 387.504C1891.07 388.05 1890.7 388.562 1890.16 388.647L1889.85 386.671ZM1418.3 87.0814L1419.27 87.3354L1418.3 87.0814ZM-37.4273 427.405L-38.3314 426.978L-37.4766 425.17L-36.5725 425.597L-37.4273 427.405ZM1890 387.659L1890.16 388.647C1843.43 395.98 1747.74 402.425 1648.6 378.344C1549.46 354.258 1446.78 299.609 1386.32 184.687L1387.21 184.221L1388.09 183.756C1448.21 298.014 1550.29 352.402 1649.08 376.4C1747.88 400.402 1843.29 393.977 1889.85 386.671L1890 387.659ZM1387.21 184.221L1386.32 184.687C1356.14 127.319 1344.97 84.6765 1344.78 54.9032C1344.59 25.1484 1355.39 8.0221 1369.38 2.22198C1383.37 -3.57527 1400.04 2.16202 1411.04 17.0531C1422.07 31.9674 1427.48 56.07 1419.27 87.3354L1418.3 87.0814L1417.33 86.8274C1425.42 56.0086 1420.02 32.5642 1409.44 18.2421C1398.83 3.89675 1383.08 -1.29171 1370.15 4.06956C1357.22 9.42796 1346.59 25.5444 1346.78 54.8903C1346.97 84.2177 1357.98 126.534 1388.09 183.756L1387.21 184.221ZM1418.3 87.0814L1419.27 87.3354C1401.93 153.358 1304.91 364.653 1078.6 496.309C852.221 628.01 496.68 679.896 -37.4273 427.405L-37 426.501L-36.5725 425.597C497.095 677.88 851.918 625.872 1077.6 494.58C1303.36 363.241 1400.1 152.44 1417.33 86.8274L1418.3 87.0814Z' fill='%238F66A3'/%3E%3C/svg%3E");
+  opacity: 0.44;
+  z-index: 0;
+}
+
+/* Progress Bar */
+.application-form-container .progress-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--Primary-Indigo-50);
+  position: relative;
+  z-index: 1;
+}
+
+.application-form-container .progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #406 0%, #66CC5B 100%);
+  transition: width 0.3s ease;
+}
+
+/* Header */
+.application-form-container .form-header {
+  display: flex;
+  width: 100%;
+  padding: 24px 120px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--Grays-100);
+  background: var(--Grays-50);
+  position: relative;
+  z-index: 1;
+}
+
+.application-form-container .exit-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.application-form-container .close-icon {
+  width: 24px;
+  height: 16px;
+  transform: rotate(-90deg);
+}
+
+.application-form-container .separator {
+  width: 1px;
+  height: 21px;
+  background: var(--Gray-100);
+}
+
+.application-form-container .exit-text {
+  color: var(--Grays-700);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.application-form-container .step-info {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.application-form-container .step-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.application-form-container .step-label {
+  color: var(--Grays-500);
+  text-align: center;
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.application-form-container .step-title {
+  color: var(--Grays-800);
+  text-align: right;
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.application-form-container .step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--Primary-Indigo-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.application-form-container .step-circle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--Primary-Indigo-500) 0deg, var(--Primary-Indigo-500) 90deg, var(--Primary-Indigo-100) 90deg, var(--Primary-Indigo-100) 360deg);
+  z-index: -1;
+}
+
+.application-form-container .step-circle .step-number {
+  color: var(--Primary-Indigo-900);
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10.98px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+/* Form Content */
+.application-form-container .form-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+  padding: 48px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+/* Summary Section */
+.application-form-container .summary-section {
+  display: flex;
+  width: 223px;
+  min-width: 223px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.application-form-container .summary-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 30px;
+  width: 2px;
+  height: 137px;
+  background: var(--Primary-Indigo-100);
+  transform: rotate(-90deg);
+  transform-origin: left top;
+}
+
+.application-form-container .summary-title {
+  color: var(--Grays-500);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 1.43px;
+}
+
+.application-form-container .summary-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 20px;
+}
+
+.application-form-container .summary-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 32px;
+}
+
+.application-form-container .step-indicator {
+  width: 2px;
+  height: 32px;
+  background: var(--Primary-Indigo-100);
+}
+
+.application-form-container .step-indicator.active {
+  background: var(--Primary-Indigo-500);
+}
+
+.application-form-container .summary-step span {
+  width: 160px;
+  color: var(--Grays-500);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.application-form-container .summary-step.active span {
+  color: var(--Primary-Indigo-500);
+}
+
+/* Main Form */
+.application-form-container .main-form {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  border-radius: 12px;
+  background: var(--Backgrounds-Background-White);
+  box-shadow: 1px 4px 18.9px -14px rgba(123, 109, 109, 0.25);
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.application-form-container .form-section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.application-form-container .section-title {
+  color: var(--Primary-Indigo-500);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 32px;
+  margin: 0;
+}
+
+.application-form-container .section-subtitle {
+  color: var(--Grays-500);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+/* Form Fields */
+.application-form-container .form-fields {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+  box-sizing: border-box;
+}
+
+.application-form-container .form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.application-form-container .form-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.application-form-container .form-field label {
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+.application-form-container .form-field input,
+.application-form-container .form-field select {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #EBE9EC;
+  background: var(--Backgrounds-Background-White);
+  color: var(--Grays-800);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+.application-form-container .form-field input::placeholder {
+  color: var(--Grays-300);
+}
+
+/* Phone Field */
+.application-form-container .phone-field-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.application-form-container .country-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px 12px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--Gray-100);
+  background: var(--Backgrounds-Background-White);
+  min-width: 103px;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.application-form-container .flag-icon {
+  width: 18px;
+  height: 12px;
+  border-radius: 1px;
+}
+
+.application-form-container .country-select span {
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.application-form-container .phone-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.application-form-container .phone-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #EBE9EC;
+  background: var(--Backgrounds-Background-White);
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.application-form-container .country-code {
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.application-form-container .phone-input input {
+  border: none;
+  background: transparent;
+  padding: 0;
+  flex: 1;
+  color: var(--Grays-800);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  min-height: auto;
+}
+
+.application-form-container .phone-input input:focus {
+  outline: none;
+}
+
+/* File Upload Field */
+.application-form-container .file-upload-field {
+  display: flex;
+  padding: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--Gray-100);
+  background: var(--Backgrounds-Background-White);
+}
+
+.application-form-container .file-upload-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.application-form-container .file-icon-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.application-form-container .file-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 34px;
+  background: var(--Grays-50);
+}
+
+.application-form-container .file-icon-section span {
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.application-form-container .upload-btn {
+  color: var(--Primary-Indigo-400);
+  text-align: right;
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Select Field Styling */
+.application-form-container .select-container {
+  position: relative;
+  width: 100%;
+}
+
+.application-form-container .select-container select {
+  appearance: none;
+  width: 100%;
+  padding-right: 40px;
+}
+
+.application-form-container .dropdown-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Track Selection Specific */
+.application-form-container .track-selection-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.application-form-container .track-description {
+  color: var(--Grays-400);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+/* Skills Field */
+.application-form-container .skills-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.application-form-container .skills-field label {
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+.application-form-container .skills-container {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #EBE9EC;
+  background: var(--Backgrounds-Background-White);
+  min-height: 67px;
+  display: flex;
+  align-items: center;
+}
+
+.application-form-container .skills-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.application-form-container .skill-tag {
+  display: flex;
+  padding: 8px 6px 8px 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: var(--Primary-Indigo-500);
+}
+
+.application-form-container .remove-skill {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.application-form-container .skill-tag span {
+  color: var(--Grays-50);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.application-form-container .skills-dropdown {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Textarea Field */
+.application-form-container .textarea-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.application-form-container .textarea-field label {
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+.application-form-container .textarea-field textarea {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #EBE9EC;
+  background: var(--Backgrounds-Background-White);
+  color: var(--Grays-800);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  resize: vertical;
+  min-height: 122px;
+}
+
+/* Form Actions */
+.application-form-container .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.application-form-container .cancel-btn,
+.application-form-container .previous-btn {
+  display: flex;
+  height: 48px;
+  padding: 14px 16px;
+  align-items: center;
+  gap: 16px;
+  border-radius: 6px;
+  background: var(--Grays-50);
+  border: none;
+  cursor: pointer;
+  color: var(--Grays-800);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.application-form-container .next-btn,
+.application-form-container .submit-btn {
+  display: flex;
+  height: 48px;
+  padding: 14px 16px;
+  align-items: center;
+  gap: 16px;
+  border-radius: 6px;
+  background: var(--Primary-Indigo-500);
+  border: none;
+  cursor: pointer;
+  color: var(--Grays-50);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.application-form-container .next-btn.disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+/* Submission Page Styles */
+.application-form-container .submission-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.application-form-container .submission-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  padding: 48px;
+  max-width: 588px;
+  margin: 0 auto;
+}
+
+.application-form-container .success-message {
+  display: flex;
+  padding: 24px 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 16px;
+  background: linear-gradient(93deg, var(--Primary-Indigo-400) -20.43%, #360052 42.3%, #360052 76.54%);
+  width: 100%;
+}
+
+.application-form-container .success-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.application-form-container .success-header h2 {
+  color: var(--Primary-Green-500);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 27px;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+
+.application-form-container .star-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--Primary-Green-500);
+}
+
+.application-form-container .success-divider {
+  height: 1px;
+  width: 100%;
+  border-radius: 8px;
+  background: var(--Primary-Green-800);
+}
+
+.application-form-container .success-text {
+  color: var(--Grays-50);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  margin: 0;
+}
+
+.application-form-container .email-highlight {
+  color: var(--Primary-Green-500);
+}
+
+/* Next Steps Section */
+.application-form-container .next-steps-section {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 17px;
+  border: 1px solid var(--Grays-50);
+  background: var(--Backgrounds-Background-White);
+  width: 100%;
+}
+
+.application-form-container .next-steps-title {
+  color: var(--Primary-Green-700);
+  font-family: 'Rebond Grotesque', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0 0 24px 0;
+}
+
+.application-form-container .steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.application-form-container .step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.application-form-container .next-steps-section .step-number {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  background: var(--Primary-Indigo-50);
+  color: var(--Primary-Indigo-500);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  flex-shrink: 0;
+}
+
+.application-form-container .step-content h4 {
+  color: var(--Primary-Indigo-900);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 4px 0;
+}
+
+.application-form-container .step-content p {
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+}
+
+.application-form-container .submit-another-btn {
+  display: flex;
+  padding: 14px 24px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 24px;
+  background: linear-gradient(90deg, #406 37.71%, var(--Primary-Indigo-400) 104.45%);
+  backdrop-filter: blur(2px);
+  border: none;
+  cursor: pointer;
+  color: var(--Grays-50);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.application-form-container .return-link {
+  display: flex;
+  padding: 8px 16px 8px 12px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 24px;
+  backdrop-filter: blur(2px);
+  color: var(--Grays-600);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+/* Legacy styles for backward compatibility */
+.application-form-section {
+  max-width: 500px;
+  margin: 4rem auto;
+  background: #1a0033;
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(44, 12, 77, 0.12);
+  padding: 2.5rem 2rem;
+  color: #fff;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #bc4af6;
+}
+
+.application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.application-form label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #6eea6b;
+  display: flex;
+  flex-direction: column;
+}
+
+.application-form input,
+.application-form select,
+.application-form textarea {
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #2d0b4f;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.application-form input:focus,
+.application-form select:focus,
+.application-form textarea:focus {
+  outline: 2px solid #bc4af6;
+}
+
+.form-submit-btn {
+  background: linear-gradient(90deg, #6eea6b 0%, #bc4af6 100%);
+  color: #1a0033;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+.form-submit-btn:hover {
+  background: linear-gradient(90deg, #bc4af6 0%, #6eea6b 100%);
+}
+
+.form-success {
+  color: #6eea6b;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Form validation error styles */
+.application-form-container .form-field.error input,
+.application-form-container .form-field.error select,
+.application-form-container .form-field.error textarea,
+.application-form-container .textarea-field.error textarea,
+.application-form-container .select-field.error select,
+.application-form-container .phone-field.error .phone-input {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 1px #ef4444;
+}
+
+.application-form-container .error-message {
+  color: #ef4444;
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+.application-form-container .form-field.success input,
+.application-form-container .form-field.success select,
+.application-form-container .form-field.success textarea {
+  border-color: #10b981;
+  box-shadow: 0 0 0 1px #10b981;
+}
+
+.application-form-container .character-count {
+  text-align: right;
+  color: var(--Grays-400);
+  font-family: 'Roobert', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+.application-form-container .next-btn.disabled,
+.application-form-container .submit-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (min-width: 1400px) {
+  .application-form-container .form-content {
+    padding: 48px 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .application-form-container .form-content {
+    padding: 24px 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .application-form-container .form-content {
+    padding: 24px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .application-form-container::before {
+    display: none; /* Hide background SVG on mobile */
+  }
+
+  .application-form-container .form-header {
+    padding: 16px 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .application-form-container .step-info {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .application-form-container .exit-section {
+    order: 2;
+  }
+
+  .application-form-container .form-content {
+    flex-direction: column;
+    padding: 24px 20px;
+    gap: 24px;
+  }
+
+  .application-form-container .summary-section {
+    width: 100%;
+    margin-bottom: 0;
+    order: 2;
+  }
+
+  .application-form-container .summary-section::before {
+    display: none;
+  }
+
+  .application-form-container .summary-steps {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 0;
+  }
+
+  .application-form-container .summary-step {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 80px;
+  }
+
+  .application-form-container .summary-step span {
+    font-size: 10px;
+    text-align: center;
+    line-height: 12px;
+    width: auto;
+  }
+
+  .application-form-container .step-indicator {
+    width: 20px;
+    height: 4px;
+  }
+
+  .application-form-container .main-form {
+    padding: 20px;
+    order: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .application-form-container .section-title {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .application-form-container .form-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .application-form-container .phone-field-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .application-form-container .skills-list {
+    justify-content: flex-start;
+  }
+
+  .application-form-container .skill-tag {
+    flex-shrink: 0;
+  }
+
+  .application-form-container .form-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .application-form-container .form-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .application-form-container .submission-content {
+    padding: 24px 20px;
+    max-width: 100%;
+  }
+
+  .application-form-container .success-message {
+    padding: 20px 24px;
+  }
+
+  .application-form-container .success-header h2 {
+    font-size: 22px;
+  }
+
+  .application-form-container .next-steps-section {
+    padding: 24px 20px;
+  }
+
+  .application-form-container .step-item {
+    align-items: flex-start;
+  }
+
+  .application-form-container .step-content h4 {
+    font-size: 14px;
+  }
+
+  .application-form-container .step-content p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .application-form-container .form-header {
+    padding: 12px 16px;
+  }
+
+  .application-form-container .form-content {
+    padding: 16px;
+  }
+
+  .application-form-container .main-form {
+    padding: 16px;
+  }
+
+  .application-form-container .section-title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .application-form-container .section-subtitle {
+    font-size: 13px;
+  }
+
+  .application-form-container .summary-steps {
+    gap: 4px;
+  }
+
+  .application-form-container .summary-step {
+    min-width: 60px;
+  }
+
+  .application-form-container .summary-step span {
+    font-size: 9px;
+  }
+
+  .application-form-container .step-circle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .application-form-container .step-circle .step-number {
+    font-size: 9px;
+  }
+
+  .application-form-container .submission-content {
+    padding: 16px;
+  }
+
+  .application-form-container .success-message {
+    padding: 16px 20px;
+  }
+
+  .application-form-container .success-header h2 {
+    font-size: 18px;
+  }
+
+  .application-form-container .success-text {
+    font-size: 13px;
+  }
+}
