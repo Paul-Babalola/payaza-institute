@@ -24,7 +24,7 @@ const ExpectSection: React.FC = () => {
           left: "47%",
           transform: "translate(-50%, -50%)",
           opacity: 1.0,
-          zIndex: 0,
+          zIndex: 1,
           width: "97vw",
           maxWidth: "100%",
           pointerEvents: "none",

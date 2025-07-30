@@ -88,7 +88,7 @@
   justify-content: space-between;
   overflow: hidden; /* prevent overflow from rotated image */
   padding: 4rem 2rem 0 2rem;
-  background: linear-gradient(135deg, #2d0b4f 60%, #1a0033 100%);
+  background: linear-gradient(0deg, #1a0033 0%, #1a0033 100%);
   color: #fff;
   clip-path: inset(0 0 200px 0);
   margin-bottom: -13rem;

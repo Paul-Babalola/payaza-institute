@@ -9,10 +9,10 @@ const Footer: React.FC = () => (
       className="footer-ribbon-image"
       style={{
         position: "absolute",
-        top: "1%",
-        left: "71%",
+        top: "0%",
+        left: "71.2%",
         transform: "translateX(-50%)",
-        width: "57vw",
+        width: "57.5vw",
         maxWidth: 1055,
         opacity: 1,
         zIndex: 2,

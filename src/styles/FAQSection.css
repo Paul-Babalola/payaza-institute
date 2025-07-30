@@ -18,10 +18,10 @@
 .faq-section {
   width: 100vw;
   display: flex;
-  height: 100vh;
+  height: 110vh;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(0deg, #2d0b4f 60%, #1a0033 150%);
+  background: linear-gradient(180deg, #1a0033 0%, #180124 100%);
   padding: 4rem 0 5rem 0;
   position: relative;
   z-index: 2;

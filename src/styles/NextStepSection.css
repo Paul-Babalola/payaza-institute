@@ -2,111 +2,170 @@
 
 .next-step-section {
   width: 100vw;
-  background: linear-gradient(0deg, #2d0b4f 60%, #1a0033 100%);
-  padding: 5rem 0 3rem 0;
+  background: linear-gradient(0deg, #1a0033 60%, #1a0033 100%);
+  padding: 2rem 0 0rem 0;
   position: relative;
-  z-index: -2;
-  height: 758px;
+  z-index: -1;
+  height: 858px;
   font-family: "Roboto", "Inter", Arial, sans-serif;
 }
 
-.next-step-title {
-  text-align: center;
-  font-size: 3rem;
+.title {
+  font-size: 70px;
   font-weight: 400;
-  color: #fff;
+  text-align: left;
+  font-family: "Rebond Grotesque", "Roboto", "Inter", Arial, sans-serif;
   margin-bottom: 4rem;
+  color: #fff;
+  letter-spacing: -2%;
+  width: 750px;
+  position: relative;
+  padding-left: 10rem;
+  top: -2rem;
 }
-.next-step-highlight {
+
+.highlight-career {
   color: #bc4af6;
   font-weight: 700;
   font-style: italic;
 }
-.next-step-highlight-alt {
-  color: #fff;
+
+.highlight-steps {
+  color: #bc4af6;
   font-weight: 700;
   font-style: italic;
 }
 
-.next-step-steps {
+.steps-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 4rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
   position: relative;
-  margin: 0 auto;
-  max-width: 1200px;
-}
-
-.next-step-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  min-width: 220px;
-}
-
-.next-step-dot-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 32px;
-  margin-bottom: 1.5rem;
-}
-.next-step-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #bc4af6;
-  box-shadow: 0 0 0 4px #2d0b4f;
-  z-index: 2;
-}
-.next-step-line {
-  width: 120px;
-  height: 2px;
-  background: linear-gradient(90deg, #bc4af6 0%, #6eea6b 100%);
-  margin-left: -2px;
   z-index: 1;
 }
 
-.next-step-content {
+.step {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-.next-step-number {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-.next-step-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  font-style: italic;
-}
-.next-step-desc {
-  font-size: 1rem;
-  color: #cfc3e6;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-  max-width: 220px;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
 }
 
-@media (max-width: 900px) {
-  .next-step-steps {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
-  .next-step-item {
-    min-width: 0;
-    width: 90vw;
-  }
-  .next-step-line {
-    width: 60vw;
-  }
+.step-content {
+  position: relative;
+  left: 7rem;
+  top: -1rem;
+}
+
+.dotted-arrow {
+  width: 62px;
+  height: 86px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  align-self: center;
+  left: 7rem;
+  top: 2rem;
+  position: relative;
+}
+
+.step-3 {
+  top: 10.5rem;
+  left: -18rem;
+}
+
+.step-3 .step-desc {
+  width: 198px;
+  color: #f4f0f8;
+  font-size: 18px;
+  line-height: 126%;
+}
+
+.step-3 .step-number {
+  top: 7.5rem;
+  left: 7.5rem;
+}
+
+.step-2 {
+  top: 6.8rem;
+  left: -10rem;
+}
+
+.step-2 .step-desc {
+  width: 198px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 126%;
+
+  color: #f4f0f8;
+}
+
+.step-2 .step-number {
+  left: 7rem;
+  top: 7rem;
+}
+
+.step-1 {
+  top: 4rem;
+  left: -3rem;
+}
+
+.step-1 .step-desc {
+  width: 201px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 126%;
+  color: #f4f0f8;
+}
+
+.step-1 .step-content {
+  top: -2.3rem;
+}
+
+.step-1 .step-number {
+  left: 7.5rem;
+  top: 7.5rem;
+}
+
+.step-0 .step-desc {
+  width: 173px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 126%;
+  color: #f4f0f8;
+  font-family: "Roobert", "Inter", Arial, sans-serif;
+}
+
+.step-0 .dotted-arrow {
+  position: relative;
+}
+
+.step-0 {
+  top: 0.5rem;
+  left: 4rem;
+}
+
+.step-0 .step-number {
+  top: 7rem;
+  left: 7rem;
+}
+
+.step-title {
+  color: #4d9944;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "Rebond Grotesque", sans-serif;
+  width: 208px;
+}
+
+.step-number {
+  font-size: 52px;
+  font-family: "Roobert Semi-Bold", sans-serif;
+  font-weight: 600;
+  opacity: 0.15;
+  color: #fff;
+  position: absolute;
+  bottom: -2.5rem;
+  left: 6rem;
 }
