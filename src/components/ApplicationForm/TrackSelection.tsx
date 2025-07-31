@@ -12,6 +12,8 @@ const TrackSelection: React.FC = () => {
       setError("Please select a track to continue");
       return;
     }
+    // Save selected track to localStorage
+    localStorage.setItem("selectedTrack", selectedTrack);
     navigate("/apply/background");
   };
 

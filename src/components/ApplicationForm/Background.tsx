@@ -3,7 +3,102 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/ApplicationForm.css";
 
 const Background: React.FC = () => {
-  const navigate = useNavigate();
+  // Load previous data
+  React.useEffect(() => {
+    // Load previous form data if available
+    const personalInfo = localStorage.getItem("personalInformation");
+    if (personalInfo) {
+      setFormData((prev) => ({ ...prev, ...JSON.parse(personalInfo) }));
+    }
+    // Load background data if available
+    const backgroundInfo = localStorage.getItem("backgroundInformation");
+    if (backgroundInfo) {
+      setFormData((prev) => ({ ...prev, ...JSON.parse(backgroundInfo) }));
+    }
+  }, []);
+  // Track-based skills and tools
+  const trackSkills: { [key: string]: string[] } = {
+    "Product and Design Track": [
+      "Wireframing",
+      "Prototyping",
+      "User Research",
+      "UX Writing",
+      "Design Systems",
+      "Figma",
+      "Adobe XD",
+      "Accessibility",
+      "Journey Mapping",
+      "Usability Testing",
+    ],
+    "Engineering Track": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Python",
+      "APIs",
+      "Docker",
+      "SQL",
+      "Git",
+      "Testing",
+    ],
+    "Career & AI Productivity Track": [
+      "Prompt Engineering",
+      "Notion",
+      "Automation",
+      "AI Research",
+      "Productivity Tools",
+      "ChatGPT",
+      "Google Workspace",
+      "LinkedIn Optimization",
+      "Time Management",
+      "Remote Collaboration",
+    ],
+  };
+
+  const trackTools: { [key: string]: string[] } = {
+    "Product and Design Track": [
+      "Figma",
+      "Adobe XD",
+      "Sketch",
+      "Miro",
+      "InVision",
+      "Zeplin",
+      "Canva",
+      "Overflow",
+      "Maze",
+      "Balsamiq",
+    ],
+    "Engineering Track": [
+      "VS Code",
+      "GitHub",
+      "Postman",
+      "Docker",
+      "Jira",
+      "Slack",
+      "AWS",
+      "MongoDB",
+      "Redis",
+      "Linux",
+    ],
+    "Career & AI Productivity Track": [
+      "Notion",
+      "Zapier",
+      "Google Workspace",
+      "Slack",
+      "Trello",
+      "Calendly",
+      "ChatGPT",
+      "LinkedIn",
+      "Airtable",
+      "Miro",
+    ],
+  };
+
+  // Get selected track from localStorage (set in TrackSelection)
+  const selectedTrack = localStorage.getItem("selectedTrack") || "";
+  // Compulsory fields: currentPosition, yearsOfExperience, educationLevel, fieldOfStudy, location
+  // ...existing code...
   const [formData, setFormData] = useState({
     currentPosition: "",
     yearsOfExperience: "",
@@ -14,6 +109,14 @@ const Background: React.FC = () => {
     technicalSkills: [] as string[],
     tools: [] as string[],
   });
+
+  const isFormValid =
+    formData.currentPosition.trim() !== "" &&
+    formData.yearsOfExperience.trim() !== "" &&
+    formData.educationLevel.trim() !== "" &&
+    formData.fieldOfStudy.trim() !== "" &&
+    formData.location.trim() !== "";
+  const navigate = useNavigate();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -33,10 +136,14 @@ const Background: React.FC = () => {
   };
 
   const handleNext = () => {
+    // Save background data
+    localStorage.setItem("backgroundInformation", JSON.stringify(formData));
     navigate("/apply/motivation-goals");
   };
 
   const handlePrevious = () => {
+    // Save background data before going back
+    localStorage.setItem("backgroundInformation", JSON.stringify(formData));
     navigate("/apply/track-selection");
   };
 
@@ -158,6 +265,10 @@ const Background: React.FC = () => {
                     name="educationLevel"
                     value={formData.educationLevel}
                     onChange={handleInputChange}
+                    style={{
+                      border: "1px solid #EBE9EC",
+                      borderRadius: "6px",
+                    }}
                   >
                     <option value="Student">Student</option>
                     <option value="High School">High School</option>
@@ -218,110 +329,61 @@ const Background: React.FC = () => {
             <div className="skills-field">
               <label>Technical Skills</label>
               <div className="skills-container">
-                <div className="skills-list">
-                  {formData.technicalSkills.map((skill, index) => (
-                    <div key={index} className="skill-tag">
-                      <button
-                        type="button"
-                        className="remove-skill"
-                        onClick={() => removeSkill(skill, "technicalSkills")}
-                      >
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                        >
-                          <path
-                            d="M8.18 3.82L4.82 7.18"
-                            stroke="#F4F3F5"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M8.18 7.18L4.82 3.82"
-                            stroke="#F4F3F5"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
-                      <span>{skill}</span>
-                    </div>
-                  ))}
-                </div>
-                <svg
-                  className="dropdown-arrow skills-dropdown"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
+                <select
+                  multiple
+                  style={{
+                    minHeight: "67px",
+                    width: "100%",
+                    border: "none",
+                    background: "transparent",
+                    fontSize: "15px",
+                  }}
+                  value={formData.technicalSkills}
+                  onChange={(e) => {
+                    const options = Array.from(e.target.selectedOptions).map(
+                      (opt) => opt.value
+                    );
+                    setFormData((prev) => ({
+                      ...prev,
+                      technicalSkills: options,
+                    }));
+                  }}
                 >
-                  <path
-                    d="M8 10L12 14L16 10"
-                    stroke="#0F0E10"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                  {trackSkills[selectedTrack]?.map((skill) => (
+                    <option key={skill} value={skill}>
+                      {skill}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
             <div className="skills-field">
               <label>Tools</label>
               <div className="skills-container">
-                <div className="skills-list">
-                  {formData.tools.map((tool, index) => (
-                    <div key={index} className="skill-tag">
-                      <button
-                        type="button"
-                        className="remove-skill"
-                        onClick={() => removeSkill(tool, "tools")}
-                      >
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                        >
-                          <path
-                            d="M8.18 3.82L4.82 7.18"
-                            stroke="#F4F3F5"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M8.18 7.18L4.82 3.82"
-                            stroke="#F4F3F5"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
-                      <span>{tool}</span>
-                    </div>
-                  ))}
-                </div>
-                <svg
-                  className="dropdown-arrow skills-dropdown"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
+                <select
+                  multiple
+                  style={{
+                    minHeight: "67px",
+                    width: "100%",
+                    border: "none",
+                    background: "transparent",
+                    fontSize: "15px",
+                  }}
+                  value={formData.tools}
+                  onChange={(e) => {
+                    const options = Array.from(e.target.selectedOptions).map(
+                      (opt) => opt.value
+                    );
+                    setFormData((prev) => ({ ...prev, tools: options }));
+                  }}
                 >
-                  <path
-                    d="M8 10L12 14L16 10"
-                    stroke="#0F0E10"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                  {trackTools[selectedTrack]?.map((tool) => (
+                    <option key={tool} value={tool}>
+                      {tool}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
@@ -333,7 +395,12 @@ const Background: React.FC = () => {
               >
                 Previous
               </button>
-              <button type="button" className="next-btn" onClick={handleNext}>
+              <button
+                type="button"
+                className={`next-btn${!isFormValid ? " disabled" : ""}`}
+                onClick={handleNext}
+                disabled={!isFormValid}
+              >
                 Next
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path
