@@ -1,171 +1,382 @@
 import React from "react";
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Link,
+  IconButton,
+  Button,
+  Divider,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import LaunchIcon from "@mui/icons-material/Launch";
 import { useNavigate } from "react-router-dom";
-import "../styles/Footer.css";
 
-const Footer: React.FC = () => {
+const FooterContainer = styled(Box)(({ theme }) => ({
+  background: "linear-gradient(180deg, #180124 0%, #0F0216 100%)",
+  color: "#DEDAE1",
+  padding: theme.spacing(15, 0, 10.5),
+  width: "100%",
+  position: "relative",
+  overflow: "hidden",
+  [theme.breakpoints.down("md")]: {
+    padding: theme.spacing(8, 0, 6),
+  },
+  [theme.breakpoints.down("sm")]: {
+    padding: theme.spacing(6, 0, 4),
+  },
+}));
+
+const RibbonBackground = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: 0,
+  left: "31%",
+  right: 0,
+  bottom: "10%",
+  backgroundImage: "url('/src/assets/RibbonFooter.png')",
+  backgroundSize: "contain",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  opacity: 0.3,
+  zIndex: 0,
+  width: "1379.977px",
+  height: "685.534px",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
+
+const PayazaLogo = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  marginBottom: "10px",
+});
+
+const SocialIconButton = styled(IconButton)({
+  width: 32,
+  height: 32,
+  backgroundColor: "#66CC5B",
+  color: "#180124",
+  borderRadius: "50%",
+  padding: 4,
+  "&:hover": {
+    backgroundColor: "#80FF72",
+  },
+});
+
+const ApplyButton = styled(Button)({
+  borderRadius: 96,
+  border: "1px solid #80FF72",
+  color: "#80FF72",
+  textTransform: "none",
+  fontSize: 14,
+  fontWeight: 500,
+  padding: "16px",
+  minHeight: 40,
+  "&:hover": {
+    backgroundColor: "rgba(128, 255, 114, 0.1)",
+  },
+});
+
+const SectionTitle = styled(Typography)({
+  color: "rgba(128, 255, 114, 0.8)",
+  fontSize: 16,
+  fontWeight: 400,
+  letterSpacing: "-0.5px",
+  marginBottom: "45px",
+});
+
+const FooterLink = styled(Link)({
+  color: "#B3B8C5",
+  fontSize: 16,
+  fontWeight: 400,
+  letterSpacing: "-0.5px",
+  textDecoration: "none",
+  display: "block",
+  marginBottom: "24px",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#DEDAE1",
+  },
+});
+
+const CopyrightText = styled(Typography)({
+  color: "#F4F0F8",
+  fontSize: 14,
+  fontWeight: 400,
+  opacity: 0.61,
+});
+
+const BottomLink = styled(Link)({
+  color: "#F4F0F8",
+  fontSize: 14,
+  fontWeight: 400,
+  textDecoration: "none",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#80FF72",
+  },
+});
+
+const PayazaFooter: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
 
-  const handleApplyNow = () => {
-    navigate("/apply");
-  };
+  const PayazaLogoSVG = () => (
+    <svg
+      width="130"
+      height="32"
+      viewBox="0 0 130 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M37.2996 14.4376C37.2996 13.0663 37.6424 11.8006 38.328 10.6403C39.04 9.48002 40.0157 8.54388 41.2551 7.83189C42.4682 7.17264 43.7603 6.84302 45.1316 6.84302C46.5292 6.84302 47.8346 7.18583 49.0476 7.87145C50.2607 8.58344 51.2364 9.54594 51.9748 10.759C52.6604 11.972 53.0032 13.2773 53.0032 14.6749C53.0032 16.0989 52.6472 17.4174 51.9352 18.6304C51.2232 19.8171 50.2738 20.7664 49.0872 21.4784C47.9005 22.1904 46.582 22.5464 45.1316 22.5464C43.4702 22.5464 41.9539 22.0453 40.5827 21.0433V26.3436C40.3849 26.6205 40.0289 27.1743 39.3564 27.5698C38.4862 28.0841 37.6556 28.0841 37.2996 28.0841C37.2996 23.5484 37.2996 18.9996 37.2996 14.4376ZM41.176 16.9691C41.5979 17.6547 42.1517 18.2085 42.8374 18.6304C43.523 19.0523 44.2877 19.2633 45.1316 19.2633C45.9491 19.2633 46.7138 19.0523 47.4258 18.6304C48.1378 18.2085 48.7048 17.6547 49.1268 16.9691C49.5223 16.2835 49.7201 15.5188 49.7201 14.6749C49.7201 13.8574 49.5091 13.1059 49.0872 12.4203C48.6916 11.7083 48.1378 11.1413 47.4258 10.7194C46.7402 10.2975 45.9754 10.0865 45.1316 10.0865C44.3405 10.0865 43.5889 10.2975 42.8769 10.7194C42.1649 11.1413 41.6112 11.6951 41.2156 12.3807C40.7937 13.0663 40.5827 13.8311 40.5827 14.6749C40.5827 15.4924 40.7804 16.2571 41.176 16.9691Z"
+        fill="white"
+      />
+      <path
+        d="M84.5292 6.84302V15.6242C84.5292 17.0087 84.2127 18.1953 83.5403 19.2633C82.8547 20.3181 81.958 21.1356 80.8505 21.7157C80.2967 22.0058 79.7165 22.2167 79.11 22.3486V28.0841H78.0816C76.8553 28.0841 75.8665 27.0952 75.8665 25.869V22.4277C75.1545 22.2695 74.482 22.0321 73.8491 21.7157C72.7416 21.1356 71.8449 20.3181 71.1593 19.2633C70.4869 18.1953 70.1704 17.0087 70.1704 15.6242V6.84302H71.3571C72.5042 6.84302 73.414 7.75279 73.414 8.86033V15.6242C73.414 16.7713 73.8095 17.6415 74.5611 18.314C75.1412 18.7886 75.8005 19.0919 76.5389 19.2237C76.5653 19.2237 76.5917 19.2237 76.618 19.2237C76.7235 19.2501 76.8421 19.2633 76.974 19.2633C77.0004 19.2633 77.0399 19.2633 77.0927 19.2633C77.1718 19.2633 77.2377 19.2633 77.2905 19.2633H77.4091C77.4883 19.2633 77.5674 19.2633 77.6465 19.2633C77.686 19.2633 77.7256 19.2633 77.7256 19.2633C77.8574 19.2633 77.9893 19.2501 78.1211 19.2237C78.2266 19.1974 78.3453 19.171 78.4771 19.1446C79.0705 18.9864 79.6638 18.7095 80.1385 18.314C80.9296 17.6415 81.2856 16.7713 81.2856 15.6242V8.93944C81.2856 7.75279 82.2349 6.84302 83.4216 6.84302H84.5292Z"
+        fill="white"
+      />
+      <path
+        d="M77.0928 19.2634C77.1719 19.2898 77.2642 19.303 77.3696 19.303H77.2906C77.2378 19.303 77.1719 19.2898 77.0928 19.2634Z"
+        fill="white"
+      />
+      <path
+        d="M78.5166 22.4673C78.5166 22.4673 78.5166 22.4805 78.5166 22.5068C78.4111 22.5068 78.3189 22.5068 78.2397 22.5068C78.3189 22.5068 78.4111 22.4937 78.5166 22.4673Z"
+        fill="white"
+      />
+      <path
+        d="M77.3699 19.303C77.449 19.303 77.5413 19.2898 77.6468 19.2634C77.5677 19.2898 77.4886 19.303 77.4095 19.303H77.3699Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M97.7404 21.0433C96.3427 22.0454 94.8132 22.5464 93.1519 22.5464C91.7543 22.5464 90.4489 22.1904 89.2359 21.4784C88.0228 20.7664 87.0735 19.8039 86.3879 18.5909C85.6495 17.4043 85.2803 16.099 85.2803 14.675C85.2803 13.2774 85.6363 11.972 86.3483 10.759C87.0603 9.546 88.0228 8.5835 89.2359 7.87151C90.6071 7.08041 92.1234 6.7376 93.7848 6.84308C94.7737 6.92219 95.7626 7.19907 96.6724 7.63418C98.07 8.34617 99.1644 9.34823 99.9555 10.6404C100.668 11.8006 101.024 13.0664 101.024 14.4376L100.984 19.8962C100.984 21.3202 99.8368 22.4673 98.4128 22.4673H97.7404V21.0433ZM97.1866 12.4995C96.7647 11.7347 96.1845 11.1282 95.4462 10.6799C94.7341 10.258 93.943 10.0602 93.0728 10.0866C92.3608 10.0866 91.6488 10.2844 91.0159 10.6404C90.2511 11.0623 89.6446 11.6292 89.1963 12.3412C88.7744 13.0532 88.5634 13.8443 88.5634 14.7145C88.5634 15.4265 88.7612 16.1385 89.1172 16.8109C89.5391 17.5757 90.1193 18.169 90.8577 18.5909C91.5697 19.0392 92.3608 19.2502 93.231 19.2238C93.943 19.2238 94.655 19.026 95.2879 18.67C96.0527 18.2481 96.6592 17.668 97.1075 16.9296C97.5558 16.2176 97.7667 15.4265 97.7404 14.5563C97.7008 13.8443 97.5426 13.1323 97.1866 12.4995Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M126.577 21.0433C125.179 22.0454 123.649 22.5464 121.988 22.5464C120.59 22.5464 119.285 22.1904 118.072 21.4784C116.859 20.7664 115.91 19.8039 115.224 18.5909C114.512 17.4043 114.156 16.099 114.156 14.675C114.156 13.2774 114.499 11.972 115.184 10.759C115.897 9.546 116.859 8.5835 118.072 7.87151C119.47 7.08041 120.986 6.7376 122.621 6.84308C123.649 6.92219 124.638 7.19907 125.509 7.63418C126.906 8.34617 128.001 9.34823 128.792 10.6404C129.504 11.8006 129.86 13.0664 129.86 14.4376L129.82 19.8962C129.82 21.3202 128.673 22.4673 127.249 22.4673H126.577V21.0433ZM126.023 12.4995C125.601 11.7347 125.021 11.1282 124.282 10.6799C123.57 10.258 122.779 10.0602 121.909 10.0866C121.197 10.0866 120.485 10.2844 119.852 10.6404C119.087 11.0623 118.494 11.6292 118.072 12.3412C117.624 13.0532 117.413 13.8443 117.439 14.7145C117.439 15.4265 117.597 16.1385 117.953 16.8109C118.375 17.5757 118.955 18.169 119.694 18.5909C120.406 19.0392 121.197 19.2502 122.067 19.2238C122.819 19.2238 123.531 19.026 124.164 18.67C124.928 18.2481 125.535 17.668 125.983 16.9296C126.405 16.2176 126.603 15.4265 126.577 14.5563C126.577 13.8443 126.379 13.1323 126.023 12.4995Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M66.1757 21.0433C64.778 22.0454 63.2485 22.5464 61.5872 22.5464C60.1632 22.5464 58.8578 22.1904 57.6712 21.4784C56.4581 20.7664 55.4956 19.8039 54.7836 18.5909C54.0716 17.4043 53.7156 16.099 53.7156 14.675C53.7156 13.2774 54.0716 11.972 54.7836 10.759C55.4956 9.546 56.4581 8.5835 57.6712 7.87151C59.0424 7.08041 60.5587 6.7376 62.2201 6.84308C63.209 6.92219 64.1978 7.19907 65.1076 7.63418C66.4789 8.34617 67.5601 9.34823 68.3512 10.6404C69.0896 11.8006 69.4588 13.0664 69.4588 14.4376L69.4192 19.8962C69.4192 21.3202 68.2721 22.4673 66.8481 22.4673H66.1757V21.0433ZM65.6219 12.4995C65.1999 11.7347 64.6198 11.1282 63.8814 10.6799C63.1694 10.258 62.3783 10.0602 61.5081 10.0866C60.7961 10.0866 60.0445 10.2844 59.4512 10.6404C58.6864 11.0623 58.0799 11.6292 57.6316 12.3412C57.2097 13.0532 56.9987 13.8443 56.9987 14.7145C56.9987 15.4265 57.1965 16.1385 57.5525 16.8109C57.9744 17.5757 58.5546 18.169 59.2929 18.5909C59.9786 19.0392 60.7697 19.2502 61.6663 19.2238C62.3783 19.2238 63.0903 19.026 63.7232 18.67C64.4879 18.2481 65.0945 17.668 65.5428 16.9296C65.9647 16.2176 66.1757 15.4265 66.1757 14.5563C66.1361 13.8443 65.9383 13.1323 65.6219 12.4995Z"
+        fill="white"
+      />
+      <path
+        d="M109.845 9.33499V10.2052H105.494C103.753 10.2052 102.329 8.78121 102.329 7.04079C102.329 6.92213 102.448 6.84302 102.527 6.84302H114.156C114.275 6.84302 114.354 6.92213 114.354 7.04079V8.06923C114.354 8.74166 114.117 9.37454 113.761 9.88876L106.127 19.8962V19.0655H111.546C113.247 19.0655 114.631 20.4499 114.631 22.1508V22.309C114.631 22.4277 114.552 22.5068 114.433 22.5068H102.092C101.973 22.5068 101.894 22.4277 101.894 22.309V21.1224C101.894 20.2522 102.171 19.4611 102.646 18.7886L109.845 9.33499Z"
+        fill="white"
+      />
+      <path
+        d="M15.9806 32C7.15962 32 0 24.8405 0 15.9802C0 7.15945 7.15962 0 15.9806 0C24.8411 0 32.0007 7.15945 32.0007 15.9802C32.0007 24.8405 24.8411 32 15.9806 32Z"
+        fill="#8CFF73"
+      />
+      <path
+        d="M25.9487 26.1854C25.3949 22.9023 24.2083 20.9245 22.3096 20.0939C19.6989 18.9468 16.6531 20.4103 13.6469 21.8343C12.9744 22.1508 11.8668 22.665 10.9175 23.021C10.4033 23.2583 9.88905 22.665 10.1264 22.1508C11.1153 20.2126 13.1326 17.2459 15.6247 14.6353C17.4047 12.8158 19.422 11.2336 21.6767 9.88871V16.0197C21.7163 17.1273 22.626 18.037 23.7336 18.037H24.5643C24.9203 18.037 25.1972 17.7602 25.1972 17.4042L25.1576 5.61676C25.1576 5.26076 24.8412 4.98389 24.4852 4.98389H12.0251C11.6691 4.98389 11.3922 5.26076 11.3922 5.61676V6.21008C11.3922 7.47584 12.3811 8.46472 13.6073 8.46472H17.4838C15.9016 9.59863 14.4512 10.8512 13.1327 12.2224C11.1944 14.2002 9.21662 16.7713 7.87172 19.0655C6.60593 21.1619 5.14235 24.1681 6.76414 25.9085C6.92236 26.1063 7.12018 26.2645 7.39707 26.4227C9.57264 27.6489 12.302 26.3436 15.15 24.9592C17.2069 24.0098 19.778 22.7836 20.9251 23.2979C21.4789 23.5352 21.9141 24.2867 22.2305 25.5129C22.3492 25.9085 22.5074 26.1854 22.7843 26.4623C23.2985 26.9369 23.9709 27.016 24.4852 27.016C24.8016 26.9897 25.1049 26.9501 25.395 26.8974C25.751 26.8578 25.9883 26.5414 25.9487 26.1854Z"
+        fill="#440066"
+      />
+    </svg>
+  );
+
+  const LinkedInIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M18.3369 18.2319H15.6698V14.0838C15.6698 13.0946 15.652 11.8212 14.2827 11.8212C12.8936 11.8212 12.6811 12.899 12.6811 14.0117V18.2316H10.014V9.70135H12.5744V10.8671H12.6102C12.8665 10.432 13.2367 10.074 13.6816 9.8314C14.1264 9.58874 14.6292 9.47047 15.1364 9.48917C17.8396 9.48917 18.338 11.255 18.338 13.5523L18.3369 18.2319ZM7.00472 8.53532C6.69861 8.53537 6.39935 8.44527 6.1448 8.27642C5.89025 8.10756 5.69185 7.86752 5.57465 7.58667C5.45746 7.30581 5.42675 6.99675 5.48641 6.69856C5.54608 6.40038 5.69344 6.12646 5.90985 5.91145C6.12626 5.69643 6.40201 5.54999 6.70223 5.49062C7.00245 5.43126 7.31364 5.46164 7.59647 5.57793C7.8793 5.69423 8.12105 5.8912 8.29116 6.14395C8.46128 6.3967 8.5521 6.69388 8.55216 6.9979C8.5522 7.19976 8.51219 7.39965 8.43445 7.58616C8.3567 7.77267 8.24274 7.94214 8.09905 8.0849C7.95535 8.22766 7.78474 8.34092 7.59698 8.4182C7.40922 8.49548 7.20797 8.53528 7.00472 8.53532ZM8.33824 18.2319H5.66842V9.70135H8.33824V18.2319ZM19.6665 3.00122H4.32824C3.98011 2.99732 3.64464 3.13084 3.39558 3.37246C3.14652 3.61407 3.00425 3.944 3 4.28976V19.5864C3.0041 19.9323 3.14629 20.2625 3.39534 20.5044C3.64439 20.7462 3.97994 20.88 4.32824 20.8763H19.6665C20.0155 20.8807 20.352 20.7473 20.602 20.5054C20.852 20.2635 20.9952 19.933 21 19.5864V4.28865C20.995 3.94222 20.8518 3.61191 20.6017 3.3703C20.3517 3.12869 20.0153 2.99554 19.6665 3.00011"
+        fill="currentColor"
+      />
+    </svg>
+  );
+
+  const InstagramIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M12.0008 3C9.55657 3 9.24982 3.01069 8.28981 3.05438C7.33167 3.09825 6.67766 3.24995 6.10541 3.47252C5.51346 3.7024 5.01133 4.00992 4.51108 4.51037C4.01045 5.01064 3.70294 5.51279 3.47232 6.10456C3.24919 6.67703 3.09731 7.33124 3.05419 8.28903C3.01125 9.24907 3 9.55602 3 12.0004C3 14.4447 3.01088 14.7505 3.05438 15.7106C3.09844 16.6687 3.25013 17.3228 3.47251 17.895C3.70257 18.487 4.01007 18.9892 4.51052 19.4894C5.01058 19.9901 5.51271 20.2983 6.10428 20.5282C6.67691 20.7508 7.33111 20.9025 8.28905 20.9464C9.24906 20.99 9.55563 21.0007 11.9997 21.0007C14.4442 21.0007 14.75 20.99 15.71 20.9464C16.6681 20.9025 17.3229 20.7508 17.8955 20.5282C18.4873 20.2983 18.9887 19.9901 19.4887 19.4894C19.9894 18.9892 20.2969 18.487 20.5275 17.8952C20.7487 17.3228 20.9006 16.6686 20.9456 15.7108C20.9887 14.7507 21 14.4447 21 12.0004C21 9.55602 20.9887 9.24926 20.9456 8.28922C20.9006 7.33105 20.7487 6.67703 20.5275 6.10475C20.2969 5.51279 19.9894 5.01064 19.4887 4.51037C18.9881 4.00973 18.4875 3.70222 17.895 3.47252C17.3212 3.24995 16.6668 3.09825 15.7087 3.05438C14.7487 3.01069 14.4431 3 11.998 3H12.0008ZM11.1935 4.62194C11.4331 4.62157 11.7005 4.62194 12.0008 4.62194C14.4039 4.62194 14.6887 4.63057 15.6376 4.67369C16.5151 4.71382 16.9914 4.86045 17.3086 4.98364C17.7287 5.14678 18.0281 5.34178 18.3429 5.6568C18.6579 5.97181 18.8529 6.27182 19.0164 6.69184C19.1396 7.00873 19.2864 7.485 19.3264 8.36253C19.3695 9.31132 19.3789 9.59633 19.3789 11.9983C19.3789 14.4003 19.3695 14.6853 19.3264 15.6341C19.2862 16.5116 19.1396 16.9879 19.0164 17.3048C18.8533 17.7248 18.6579 18.0239 18.3429 18.3387C18.0279 18.6537 17.7288 18.8487 17.3086 19.0118C16.9918 19.1356 16.5151 19.2819 15.6376 19.322C14.6889 19.3651 14.4039 19.3745 12.0008 19.3745C9.59763 19.3745 9.31282 19.3651 8.36406 19.322C7.48655 19.2815 7.01029 19.1348 6.69285 19.0117C6.27285 18.8485 5.97284 18.6535 5.65784 18.3385C5.34284 18.0235 5.14783 17.7242 4.98433 17.304C4.86114 16.9871 4.71433 16.5109 4.67439 15.6333C4.63127 14.6845 4.62264 14.3995 4.62264 11.9961C4.62264 9.59258 4.63127 9.30907 4.67439 8.36028C4.71452 7.48275 4.86114 7.00648 4.98433 6.68921C5.14746 6.2692 5.34284 5.96918 5.65784 5.65417C5.97284 5.33916 6.27285 5.14415 6.69285 4.98064C7.0101 4.85689 7.48655 4.71063 8.36406 4.67032C9.19431 4.63282 9.51607 4.62157 11.1935 4.61969V4.62194ZM16.805 6.11638C16.2088 6.11638 15.725 6.59958 15.725 7.19605C15.725 7.79232 16.2088 8.27609 16.805 8.27609C17.4013 8.27609 17.885 7.79232 17.885 7.19605C17.885 6.59977 17.4013 6.11638 16.805 6.11638ZM12.0008 7.3783C9.44838 7.3783 7.37892 9.44783 7.37892 12.0004C7.37892 14.5529 9.44838 16.6215 12.0008 16.6215C14.5533 16.6215 16.622 14.5529 16.622 12.0004C16.622 9.44783 14.5533 7.3783 12.0008 7.3783ZM12.0008 9.00025C13.6576 9.00025 15.0009 10.3434 15.0009 12.0004C15.0009 13.6572 13.6576 15.0005 12.0008 15.0005C10.3439 15.0005 9.00081 13.6572 9.00081 12.0004C9.00081 10.3434 10.3439 9.00025 12.0008 9.00025Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+
+  const XIcon = () => (
+    <svg width="18" height="17" viewBox="0 0 18 17" fill="none">
+      <path
+        d="M14.1687 0.555664H16.9157L10.9157 7.45928L18 16.8207H12.4337L8.09639 11.146L3.10843 16.8207H0.361446L6.79518 9.44723L0 0.555664H5.71084L9.6506 5.76048L14.1687 0.555664ZM13.1928 15.1581H14.7108L4.87952 2.10988H3.21687L13.1928 15.1581Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+
+  const EmailIcon = () => (
+    <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+      <path
+        d="M1.49829 0.88208L4.42498 2.68647C5.39071 3.28187 6.60962 3.28187 7.57535 2.68647L10.502 0.88208"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <rect
+        x="0"
+        y="0"
+        width="18"
+        height="14"
+        rx="3"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
 
   return (
-    <footer className="footer-section" style={{ position: "relative" }}>
-      <img
-        src={require("../assets/RibbonFooter.png")}
-        alt="Footer Ribbon Decoration"
-        className="footer-ribbon-image"
-        style={{
-          position: "absolute",
-          top: "0%",
-          left: "71.2%",
-          transform: "translateX(-50%)",
-          width: "57.5vw",
-          maxWidth: 1055,
-          opacity: 1,
-          zIndex: 2,
-          pointerEvents: "none",
+    <FooterContainer>
+      <RibbonBackground />
+      <Container
+        maxWidth={false}
+        sx={{
+          px: { xs: 3, sm: 4, md: 6, lg: 8, xl: 12 },
+          position: "relative",
+          zIndex: 1,
         }}
-      />
-      <div className="footer-main">
-        <div className="footer-logo-social">
-          <img
-            src={require("../assets/logo.png")}
-            alt="Payaza Logo"
-            className="footer-logo"
-          />
-          <p className="footer-address">
-            1st Floor, 301 Jide Oki St, Victoria Island, Lagos.
-          </p>
-          <div className="footer-social">
-            <a
-              href="#"
-              aria-label="WhatsApp"
-              className="footer-social-icon whatsapp"
-            >
-              <img
-                src={require("../assets/Linkedin.png")}
-                alt="WhatsApp"
-                className="linkedin"
-              />
-            </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="footer-social-icon instagram"
-            >
-              <img
-                src={require("../assets/Vector.png")}
-                alt="Instagram"
-                className="w-6 h-6"
-              />
-            </a>
-            <a href="#" aria-label="X" className="footer-social-icon x">
-              <img
-                src={require("../assets/x_logo.svg.png")}
-                alt="X"
-                className="w-6 h-6"
-              />
-            </a>
-
-            <a
-              href="#"
-              aria-label="WhatsApp"
-              className="footer-social-icon mail"
-            >
-              <img
-                src={require("../assets/email.png")}
-                alt="Email"
-                className="w-6 h-6"
-              />
-            </a>
-          </div>
-        </div>
-        <div className="footer">
-          <div className="footer-links">
-            <div>
-              <h4>Payaza Institute</h4>
-              <a href="#aboutus">About Us</a>
-              <a href="#tracks">Tracks</a>
-              <a href="#howitworks">How it works</a>
-              <a href="#FAQs">FAQs</a>
-            </div>
-            <div>
-              <h4>Resources</h4>
-              <a href="#demo">Demo</a>
-              <a href="#documentation">Documentation</a>
-              <a href="#developers">Developers</a>
-            </div>
-            <div>
-              <h4>Company</h4>
-              <a href="#aboutpayaza">About Payaza</a>
-              <a
-                href="#visitwebsite"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.3rem",
-                }}
-              >
-                Visit Website
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#22c55e"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  style={{ verticalAlign: "middle" }}
+      >
+        <Box>
+          {/* Main Footer Content */}
+          <Grid
+            container
+            spacing={{ xs: 4, sm: 6, md: 8, lg: 12, xl: 48 }}
+            sx={{ mb: 5 }}
+          >
+            {/* Left Column - Logo and Address */}
+            <Grid item xs={12} md={6} lg={4}>
+              <Box sx={{ mb: 5 }}>
+                <PayazaLogo>
+                  <PayazaLogoSVG />
+                </PayazaLogo>
+                <Typography
+                  sx={{
+                    color: "#DEDAE1",
+                    fontSize: 16,
+                    fontWeight: 400,
+                    letterSpacing: "-0.5px",
+                    mt: 2,
+                  }}
                 >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div className="footer-cta">
-            <button
-              onClick={handleApplyNow}
-              className="footer-apply"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                background: "none",
-                cursor: "pointer",
-              }}
-            >
-              Apply Now
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#22c55e"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ verticalAlign: "middle" }}
+                  1st Floor, 301 Jide Oki St, Victoria Island, Lagos.
+                </Typography>
+
+                {/* Social Icons */}
+                <Box sx={{ display: "flex", gap: 2.5, mt: 4 }}>
+                  <SocialIconButton>
+                    <LinkedInIcon />
+                  </SocialIconButton>
+                  <SocialIconButton>
+                    <InstagramIcon />
+                  </SocialIconButton>
+                  <SocialIconButton>
+                    <XIcon />
+                  </SocialIconButton>
+                  <SocialIconButton>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <EmailIcon />
+                    </Box>
+                  </SocialIconButton>
+                </Box>
+              </Box>
+            </Grid>
+
+            {/* Right Columns - Links */}
+            <Grid item xs={12} md={6} lg={8}>
+              <Grid
+                container
+                spacing={{ xs: 3, sm: 4, md: 6, lg: 8 }}
+                sx={{ justifyContent: "flex-start", textAlign: "left" }}
               >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="footer-bottom">
-        <span>© Copyright 2024. All Rights Reserved</span>
-        <div className="footer-bottom-links">
-          <a href="#privacypolicy">Privacy Policy</a>
-          <a href="#terms">Terms & Conditions</a>
-        </div>
-      </div>
-    </footer>
+                {/* Payaza Institute */}
+                <Grid item xs={12} sm={4}>
+                  <SectionTitle>Payaza Institute</SectionTitle>
+                  <Box>
+                    <FooterLink>About Us</FooterLink>
+                    <FooterLink>Tracks</FooterLink>
+                    <FooterLink>How it works</FooterLink>
+                    <FooterLink>FAQs</FooterLink>
+                    <ApplyButton
+                      onClick={() => navigate("/apply/personal-information")}
+                      endIcon={<ArrowForwardIcon />}
+                      sx={{ mt: 1, px: 4, py: 2 }}
+                    >
+                      Apply Now
+                    </ApplyButton>
+                  </Box>
+                </Grid>
+
+                {/* Resources */}
+                <Grid item xs={12} sm={4}>
+                  <SectionTitle>Resources</SectionTitle>
+                  <Box>
+                    <FooterLink>Demo</FooterLink>
+                    <FooterLink>Documentation</FooterLink>
+                    <FooterLink>Developers</FooterLink>
+                  </Box>
+                </Grid>
+
+                {/* Company */}
+                <Grid item xs={12} sm={4}>
+                  <SectionTitle>Company</SectionTitle>
+                  <Box>
+                    <FooterLink>About Payaza</FooterLink>
+                    <FooterLink
+                      sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                    >
+                      Visit Website
+                      <LaunchIcon sx={{ fontSize: 20, color: "#66CC5B" }} />
+                    </FooterLink>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          {/* Divider */}
+          <Divider sx={{ backgroundColor: "#221927", mb: 2.5 }} />
+
+          {/* Bottom Section */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexDirection: isSmall ? "column" : "row",
+              gap: isSmall ? 2 : 0,
+            }}
+          >
+            <CopyrightText>© Copyright 2024, All Rights Reserved</CopyrightText>
+            <Box sx={{ display: "flex", gap: 4 }}>
+              <BottomLink>Privacy Policy</BottomLink>
+              <BottomLink>Terms & Conditions</BottomLink>
+            </Box>
+          </Box>
+        </Box>
+      </Container>
+    </FooterContainer>
   );
 };
 
-export default Footer;
+export default PayazaFooter;

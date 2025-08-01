@@ -1,32 +1,16 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import HeroSection from "./components/HeroSection";
-import NextStepSection from "./components/NextStepSection";
-import TracksSection from "./components/TracksSection";
-import ExpectSection from "./components/ExpectSection";
-import FAQSection from "./components/FAQSection";
-import Footer from "./components/Footer";
-import SponsorshipSection from "./components/SponsorshipSection";
-import ApplicationFormFlow from "./components/ApplicationForm/ApplicationFormFlow";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PayazaLandingPage from "./components/PayazaLandingPage";
+import ApplicationFormFlow from "./components/Application Form/ApplicationFormFlow";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <Routes>
-        <Route path="/" element={
-          <>
-            <HeroSection />
-            <TracksSection />
-            <SponsorshipSection />
-            <NextStepSection />
-            <ExpectSection />
-            <FAQSection />
-            <Footer />
-          </>
-        } />
+        <Route path="/" element={<PayazaLandingPage />} />
         <Route path="/apply/*" element={<ApplicationFormFlow />} />
       </Routes>
-    </div>
+    </Router>
   );
 }
 

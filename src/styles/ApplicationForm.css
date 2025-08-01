@@ -1,5 +1,8 @@
-/* CSS Variables matching the design system */
-:root {
+/* Scoped Application Form Styles - Only affects components within .application-form-container */
+
+/* CSS Variables scoped to application form */
+.application-form-container {
+  /* CSS Variables matching the design system - scoped to this container only */
   --Grays-50: #f4f3f5;
   --Primary-Indigo-300: #8f66a3;
   --Primary-Indigo-50: #f4f0f8;
@@ -19,10 +22,57 @@
   --Primary-Green-700: #4d9944;
   --Primary-Indigo-900: #0e0014;
   --Grays-600: #5a515f;
-}
+  --primary-indigo-50: 300 7% 24%; /* Dark mode adaptation */
+  --primary-indigo-100: 270 7% 45%; /* Dark mode adaptation */
+  --primary-indigo-300: 300 23% 52%; /* #8F66A3 */
+  --primary-indigo-400: 290 45% 36%; /* #693385 */
+  --primary-indigo-500: 275 27% 83%; /* #DACCE0 */
 
-/* Base Application Form Container */
-.application-form-container {
+  --gray-100: 300 7% 24%; /* Dark mode adaptation */
+
+  --border: 300 7% 24%; /* #3E3841 */
+  --input: 300 7% 24%; /* #3E3841 */
+  --ring: 300 23% 52%; /* #8F66A3 */
+
+  --grays-50: 300 7% 24%; /* #3E3841 */
+  --grays-100: 270 7% 45%; /* #776D7D */
+  --grays-300: 270 7% 65%; /* #ACA3B1 */
+  --grays-400: 270 7% 57%; /* #938999 */
+  --grays-500: 270 7% 45%; /* #776D7D */
+  --grays-700: 300 10% 87%; /* #DEDAE1 */
+  --grays-800: 0 0% 96%; /* #F4F3F5 */
+
+  --popover: 300 7% 24%; /* #3E3841 */
+  --popover-foreground: 0 0% 96%; /* #F4F3F5 */
+
+  --primary: 285 50% 96%; /* #F4F0F8 */
+  --primary-foreground: 269 72% 19%; /* #360E54 */
+
+  --secondary: 300 7% 24%; /* #3E3841 */
+  --secondary-foreground: 0 0% 96%; /* #F4F3F5 */
+
+  --muted: 300 7% 24%; /* #3E3841 */
+  --muted-foreground: 270 7% 45%; /* #776D7D */
+
+  --card: 300 7% 24%; /* #3E3841 */
+  --card-foreground: 0 0% 96%; /* #F4F3F5 */
+
+  --accent: 300 23% 52%; /* #8F66A3 */
+  --accent-foreground: 0 0% 96%; /* #F4F3F5 */
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+
+  /* Base Application Form Container */
   width: 100vw;
   max-width: 100%;
   overflow: hidden;
@@ -65,15 +115,18 @@
   display: flex;
   width: 100vw;
   max-width: 100vw;
-  padding: 24px 0px;
+  padding: 10px 0px;
   justify-content: space-around;
   align-items: center;
-  gap: 25rem;
+  gap: 7rem;
   border-bottom: 1px solid var(--Grays-100);
   background: var(--Grays-50);
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   margin-left: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .application-form-container .exit-section {
@@ -176,9 +229,10 @@
   align-items: flex-start;
   gap: 20px;
   position: relative;
-  padding: 48px 40px;
+  padding: 10px 40px 24px 40px;
   max-width: 1400px;
   margin: 0 auto;
+  margin-top: 7vh;
   width: 100%;
   box-sizing: border-box;
   z-index: 1;
@@ -304,7 +358,7 @@
   max-width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 48px;
+  gap: 24px;
   box-sizing: border-box;
 }
 
@@ -319,24 +373,36 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 4px;
   min-width: 0;
   box-sizing: border-box;
+  position: relative;
+}
+
+.application-form-container .form-row .form-field {
+  flex: 1;
+  width: calc(50% - 10px);
 }
 
 .application-form-container .form-field label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
   color: var(--Grays-400);
   font-family: "Roobert", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 14px;
+  line-height: 18px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: var(--Backgrounds-Background-White);
+  padding: 0 4px;
 }
 
 .application-form-container .form-field input,
 .application-form-container .form-field select {
   padding: 8px 16px;
   border-radius: 6px;
-  border: 1px solid #ebe9ec;
+  border: 1px solid var(--Gray-100);
   background: var(--Backgrounds-Background-White);
   color: var(--Grays-800);
   font-family: "Roobert", -apple-system, Roboto, Helvetica, sans-serif;
@@ -345,31 +411,62 @@
   line-height: 18px;
   min-height: 48px;
   box-sizing: border-box;
+  width: 100%;
+}
+
+.application-form-container .form-row .form-field input {
+  width: 100%;
 }
 
 .application-form-container .form-field input::placeholder {
-  color: var(--Grays-300);
+  color: transparent;
+}
+
+/* Hide the default option text for select elements */
+.application-form-container .form-field select option[value=""] {
+  color: transparent;
+}
+
+.application-form-container .form-field input:focus + label,
+.application-form-container .form-field input:not(:placeholder-shown) + label,
+.application-form-container .form-field select:focus + label,
+.application-form-container .form-field select:not([value=""]) + label {
+  top: -8px;
+  left: 12px;
+  font-size: 12px;
+  color: var(--Primary-Indigo-500);
+  background: var(--Backgrounds-Background-White);
+  padding: 0 4px;
+}
+
+.application-form-container .form-field input:focus,
+.application-form-container .form-field select:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--Primary-Indigo-500);
 }
 
 /* Phone Field */
 .application-form-container .phone-field-container {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
+  margin-top: -1.2rem;
+  margin-bottom: 0.2rem;
+  align-items: flex-end;
 }
 
 .application-form-container .country-select {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 8px 12px 16px;
-  border-radius: 4px;
+  padding: 12px 16px;
+  border-radius: 6px;
   border: 1px solid var(--Gray-100);
   background: var(--Backgrounds-Background-White);
   min-width: 103px;
   height: 48px;
   box-sizing: border-box;
-  margin-top: 1.5rem;
+  position: relative;
 }
 
 .application-form-container .flag-icon {
@@ -389,7 +486,33 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.application-form-container .phone-field label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: var(--Grays-400);
+  font-family: "Roobert", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: var(--Backgrounds-Background-White);
+  padding: 0 4px;
+}
+
+.application-form-container .phone-field input:focus + label,
+.application-form-container .phone-field input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 12px;
+  font-size: 12px;
+  color: var(--Primary-Indigo-500);
+  background: var(--Backgrounds-Background-White);
+  padding: 0 4px;
 }
 
 .application-form-container .phone-input {
@@ -398,7 +521,7 @@
   gap: 8px;
   padding: 8px 16px;
   border-radius: 6px;
-  border: 1px solid #ebe9ec;
+  border: 1px solid var(--Gray-100);
   background: var(--Backgrounds-Background-White);
   height: 48px;
   box-sizing: border-box;
@@ -436,7 +559,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  width: 53.5vw;
+  width: 100%;
   border-radius: 6px;
   border: 1px solid var(--Gray-100);
   background: var(--Backgrounds-Background-White);
@@ -513,6 +636,7 @@
   transform: translateY(-50%);
   pointer-events: none;
   margin-left: 0;
+  z-index: 1;
 }
 
 /* Track Selection Specific */
@@ -525,11 +649,11 @@
 
 .application-form-container .track-description {
   color: var(--Grays-400);
-  font-family: "Rebond Grotesque", -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 9px;
+  font-family: "Roobert", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
   font-weight: 400;
-  line-height: normal;
-  margin: 0;
+  line-height: 1px;
+  padding: 0px 18px;
 }
 
 /* Skills Field */
@@ -867,84 +991,6 @@
   cursor: pointer;
 }
 
-/* Legacy styles for backward compatibility */
-.application-form-section {
-  max-width: 500px;
-  margin: 4rem auto;
-  background: #1a0033;
-  border-radius: 16px;
-  box-shadow: 0 4px 32px rgba(44, 12, 77, 0.12);
-  padding: 2.5rem 2rem;
-  color: #fff;
-  font-family: "Inter", Arial, sans-serif;
-}
-
-.form-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #bc4af6;
-}
-
-.application-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.application-form label {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: #6eea6b;
-  display: flex;
-  flex-direction: column;
-}
-
-.application-form input,
-.application-form select,
-.application-form textarea {
-  margin-top: 0.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  border: none;
-  background: #2d0b4f;
-  color: #fff;
-  font-size: 1rem;
-  font-family: inherit;
-}
-
-.application-form input:focus,
-.application-form select:focus,
-.application-form textarea:focus {
-  outline: 2px solid #bc4af6;
-}
-
-.form-submit-btn {
-  background: linear-gradient(90deg, #6eea6b 0%, #bc4af6 100%);
-  color: #1a0033;
-  font-weight: 700;
-  border: none;
-  border-radius: 8px;
-  padding: 1rem;
-  font-size: 1.1rem;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.2s;
-}
-
-.form-submit-btn:hover {
-  background: linear-gradient(90deg, #bc4af6 0%, #6eea6b 100%);
-}
-
-.form-success {
-  color: #6eea6b;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 2rem;
-}
-
 /* Form validation error styles */
 .application-form-container .form-field.error input,
 .application-form-container .form-field.error select,
@@ -1028,7 +1074,7 @@
 
   .application-form-container .form-content {
     flex-direction: column;
-    padding: 24px 20px;
+    padding: 100px 20px 24px 20px;
     gap: 24px;
   }
 
@@ -1084,11 +1130,45 @@
   .application-form-container .form-row {
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+  }
+
+  .application-form-container .form-row .form-field {
+    width: 100%;
+    flex: none;
+  }
+
+  .application-form-container .form-row .form-field input,
+  .application-form-container .form-row .form-field select {
+    width: 100%;
   }
 
   .application-form-container .phone-field-container {
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+  }
+
+  .application-form-container .country-select {
+    width: 100%;
+    min-width: 100%;
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 50px;
+  }
+
+  .application-form-container .phone-field {
+    width: 100%;
+  }
+
+  .application-form-container .phone-input {
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 50px;
+  }
+
+  .application-form-container .phone-input input {
+    font-size: 16px;
   }
 
   .application-form-container .skills-list {
@@ -1097,6 +1177,28 @@
 
   .application-form-container .skill-tag {
     flex-shrink: 0;
+  }
+
+  .application-form-container .file-upload-field {
+    width: 100%;
+    padding: 16px 12px;
+  }
+
+  .application-form-container .upload-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .application-form-container .textarea-field textarea {
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 120px;
+  }
+
+  .application-form-container .select-container select {
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 50px;
   }
 
   .application-form-container .form-actions {
@@ -1145,7 +1247,7 @@
   }
 
   .application-form-container .form-content {
-    padding: 16px;
+    padding: 80px 16px 16px 16px;
   }
 
   .application-form-container .main-form {
@@ -1196,5 +1298,347 @@
 
   .application-form-container .success-text {
     font-size: 13px;
+  }
+
+  /* Enhanced mobile responsiveness for form fields */
+  .application-form-container .form-field {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .application-form-container .form-field input,
+  .application-form-container .form-field select {
+    width: 100%;
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 14px 16px;
+    min-height: 50px;
+  }
+
+  .application-form-container .form-field label {
+    font-size: 12px;
+    top: 18px;
+  }
+
+  .application-form-container .form-field input:focus + label,
+  .application-form-container .form-field input:not(:placeholder-shown) + label,
+  .application-form-container .form-field select:focus + label,
+  .application-form-container .form-field select:not([value=""]) + label {
+    top: -6px;
+    font-size: 11px;
+  }
+
+  /* All container widths to 100% on mobile */
+  .application-form-container .form-fields {
+    width: 100%;
+  }
+
+  .application-form-container .skills-input-container {
+    width: 100%;
+  }
+
+  .application-form-container .phone-field-container {
+    width: 100%;
+  }
+
+  .application-form-container .file-upload-field {
+    width: 100%;
+  }
+
+  .application-form-container .textarea-field {
+    width: 100%;
+  }
+
+  .application-form-container .track-selection-field {
+    width: 100%;
+  }
+}
+
+/* Skills Input Container */
+.application-form-container .skills-input-container {
+  width: 100%;
+  position: relative;
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--Gray-100);
+  background: var(--Backgrounds-Background-White);
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+.application-form-container .skills-input-container label {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  font-size: 12px;
+  color: var(--Primary-Indigo-500);
+  background: var(--Backgrounds-Background-White);
+  padding: 0 4px;
+  z-index: 1;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.application-form-container .skills-select {
+  width: 70%;
+  padding: 8px 12px;
+  border: 1px solid var(--Gray-100);
+  background: var(--Backgrounds-Background-White);
+  color: var(--Grays-800);
+  font-size: 14px;
+  font-family: "Roobert", -apple-system, Roboto, Helvetica, sans-serif;
+  outline: none;
+  cursor: pointer;
+  border-radius: 6px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F0E10' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  transition: all 0.2s ease;
+}
+
+.application-form-container .skills-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--Primary-Indigo-500);
+  border-color: var(--Primary-Indigo-500);
+}
+
+/* Dark dropdown styling for technical skills and tools */
+.application-form-container .skills-select option {
+  background: #2d2d2d;
+  color: #f4f3f5;
+  padding: 12px 16px;
+  border: none;
+  font-family: "Roobert", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.application-form-container .skills-select option:hover {
+  background: #3a3a3a;
+}
+
+.application-form-container .skills-select option:checked {
+  background: #4a4a4a;
+  color: #ffffff;
+}
+
+.application-form-container .skills-select option:focus {
+  background: #3a3a3a;
+}
+
+.application-form-container .selected-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--Gray-100);
+}
+
+.application-form-container .skill-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #772e9a 0%, #bc4af6 100%);
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.application-form-container .skill-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(119, 46, 154, 0.3);
+}
+
+.application-form-container .skill-text {
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.application-form-container .remove-skill-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.application-form-container .remove-skill-btn:hover {
+  opacity: 1;
+}
+
+/* Technical Skills Container - New Design */
+.application-form-container .technical-skills-container {
+  width: 54.7vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.application-form-container .skills-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+.application-form-container .skills-label-text {
+  color: #938999;
+  font-family: Roobert, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px; /* 116.667% */
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.application-form-container .skills-select {
+  width: 54.7vw;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #ebe9ec;
+  background: #fff;
+  color: var(--Grays-800);
+  font-family: "Roobert", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  min-height: 48px;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F0E10' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  transition: all 0.2s ease;
+}
+
+.application-form-container .skills-select:focus {
+  border-color: var(--Primary-Indigo-500);
+  box-shadow: 0 0 0 1px var(--Primary-Indigo-500);
+}
+
+.application-form-container .skills-tags-container {
+  display: flex;
+  width: 54.7vw;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-radius: 2px;
+  position: relative;
+  margin-top: 8px;
+}
+
+.application-form-container .technical-skill-tag {
+  display: flex;
+  padding: 8px 6px 8px 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: #360e54;
+  position: relative;
+  height: 29px;
+  box-sizing: border-box;
+  min-width: 46px;
+}
+
+.application-form-container .remove-skill-x {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.application-form-container .remove-skill-x:hover {
+  opacity: 1;
+}
+
+.application-form-container .skill-name {
+  color: #f4f3f5;
+  font-family: Roobert, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+  letter-spacing: 0em;
+}
+
+/* Responsive adjustments for technical skills */
+@media (max-width: 768px) {
+  .application-form-container .technical-skills-container {
+    width: 100%;
+  }
+
+  .application-form-container .skills-select {
+    width: 100%;
+  }
+
+  .application-form-container .skills-tags-container {
+    width: 100%;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 29px;
+  }
+}
+
+@media (max-width: 480px) {
+  .application-form-container .technical-skills-container {
+    width: 100%;
+  }
+
+  .application-form-container .skills-select {
+    width: 100%;
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 14px 16px;
+    min-height: 50px;
+  }
+
+  .application-form-container .skills-tags-container {
+    width: 100%;
+  }
+
+  .application-form-container .technical-skill-tag {
+    font-size: 9px;
+    padding: 6px 4px 6px 3px;
+    height: 25px;
+  }
+
+  .application-form-container .skill-name {
+    font-size: 9px;
+  }
+
+  .application-form-container .remove-skill-x {
+    width: 10px;
+    height: 10px;
   }
 }
