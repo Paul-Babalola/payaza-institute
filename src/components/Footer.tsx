@@ -2,7 +2,6 @@ import React from "react";
 import {
   Box,
   Container,
-  Grid,
   Typography,
   Link,
   IconButton,
@@ -124,7 +123,7 @@ const BottomLink = styled(Link)({
 
 const PayazaFooter: React.FC = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
 
@@ -253,13 +252,16 @@ const PayazaFooter: React.FC = () => {
       >
         <Box>
           {/* Main Footer Content */}
-          <Grid
-            container
-            spacing={{ xs: 4, sm: 6, md: 8, lg: 12, xl: 48 }}
-            sx={{ mb: 5 }}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              gap: { xs: 4, sm: 6, md: 8, lg: 7, xl: 8 },
+              mb: 5,
+            }}
           >
             {/* Left Column - Logo and Address */}
-            <Grid item xs={12} md={6} lg={4}>
+            <Box sx={{ flex: { md: "0 0 50%", lg: "0 0 33.333%" }, mb: 5 }}>
               <Box sx={{ mb: 5 }}>
                 <PayazaLogo>
                   <PayazaLogoSVG />
@@ -300,17 +302,21 @@ const PayazaFooter: React.FC = () => {
                   </SocialIconButton>
                 </Box>
               </Box>
-            </Grid>
+            </Box>
 
             {/* Right Columns - Links */}
-            <Grid item xs={12} md={6} lg={8}>
-              <Grid
-                container
-                spacing={{ xs: 3, sm: 4, md: 6, lg: 8 }}
-                sx={{ justifyContent: "flex-start", textAlign: "left" }}
+            <Box sx={{ flex: { md: "0 0 50%", lg: "0 0 50%" } }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: { xs: 3, sm: 4, md: 6, lg: 8 },
+                  justifyContent: "flex-start",
+                  textAlign: "left",
+                }}
               >
                 {/* Payaza Institute */}
-                <Grid item xs={12} sm={4}>
+                <Box sx={{ flex: { sm: "0 0 33.333%" } }}>
                   <SectionTitle>Payaza Institute</SectionTitle>
                   <Box>
                     <FooterLink>About Us</FooterLink>
@@ -325,20 +331,20 @@ const PayazaFooter: React.FC = () => {
                       Apply Now
                     </ApplyButton>
                   </Box>
-                </Grid>
+                </Box>
 
                 {/* Resources */}
-                <Grid item xs={12} sm={4}>
+                <Box sx={{ flex: { sm: "0 0 33.333%" } }}>
                   <SectionTitle>Resources</SectionTitle>
                   <Box>
                     <FooterLink>Demo</FooterLink>
                     <FooterLink>Documentation</FooterLink>
                     <FooterLink>Developers</FooterLink>
                   </Box>
-                </Grid>
+                </Box>
 
                 {/* Company */}
-                <Grid item xs={12} sm={4}>
+                <Box sx={{ flex: { sm: "0 0 33.333%" } }}>
                   <SectionTitle>Company</SectionTitle>
                   <Box>
                     <FooterLink>About Payaza</FooterLink>
@@ -349,10 +355,10 @@ const PayazaFooter: React.FC = () => {
                       <LaunchIcon sx={{ fontSize: 20, color: "#66CC5B" }} />
                     </FooterLink>
                   </Box>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
 
           {/* Divider */}
           <Divider sx={{ backgroundColor: "#221927", mb: 2.5 }} />

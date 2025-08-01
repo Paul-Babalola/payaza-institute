@@ -2,7 +2,7 @@ import React from "react";
 import Navigation from "./Navigation";
 // import HeroSection from './HeroSection';
 // import AboutSection from './AboutSection';
-import TracksSection from "./TracksSection";
+// import TracksSection from "./TracksSection";
 import PartnersSection from "./PartnerSection";
 import { ProcessSection } from "./ProcessSection";
 import { ExpectationsSection } from "./ExpectationsSection";

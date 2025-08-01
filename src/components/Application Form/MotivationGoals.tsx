@@ -18,7 +18,7 @@ const MotivationGoals: React.FC = () => {
   const [errors, setErrors] = useState<MotivationErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const validateField = (name: string, value: string): string | undefined => {
+  const validateField = (_: string, value: string): string | undefined => {
     if (!value.trim()) {
       return `This field is required`;
     }
@@ -59,7 +59,9 @@ const MotivationGoals: React.FC = () => {
     const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+      setErrors({
+        motivation: "Motivation is required",
+      }); // example
       return;
     }
 

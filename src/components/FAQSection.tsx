@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Collapse,
-  Divider,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Typography, Collapse, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const FAQContainer = styled(Box)(({ theme }) => ({
@@ -251,8 +244,8 @@ const faqData: FAQData[] = [
 
 const PayazaFAQ: React.FC = () => {
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set([1])); // First item expanded by default
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const toggleItem = (id: number) => {
     const newExpandedItems = new Set(expandedItems);
