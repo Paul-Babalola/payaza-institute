@@ -31,6 +31,13 @@ const MotivationGoals: React.FC = () => {
     return undefined;
   };
 
+  const isFormValid = (): boolean => {
+    return Object.values(formData).every((value) => {
+      const trimmedValue = value.trim();
+      return trimmedValue.length >= 10 && trimmedValue.length <= 500;
+    });
+  };
+
   const validateForm = (): boolean => {
     const newErrors: MotivationErrors = {};
 
@@ -56,12 +63,8 @@ const MotivationGoals: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    const validationErrors = validateForm();
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors({
-        motivation: "Motivation is required",
-      }); // example
+    if (!isFormValid()) {
+      validateForm();
       return;
     }
 
@@ -246,9 +249,11 @@ const MotivationGoals: React.FC = () => {
               </button>
               <button
                 type="button"
-                className={`submit-btn ${isSubmitting ? "disabled" : ""}`}
+                className={`submit-btn ${
+                  isSubmitting || !isFormValid() ? "disabled" : ""
+                }`}
                 onClick={handleSubmit}
-                disabled={isSubmitting}
+                disabled={isSubmitting || !isFormValid()}
                 title="Please ensure all fields have at least 50 characters"
               >
                 {isSubmitting ? "Submitting..." : "Submit Application"}

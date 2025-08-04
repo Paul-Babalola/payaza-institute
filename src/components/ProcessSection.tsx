@@ -7,9 +7,9 @@ export const ProcessSection = (): React.JSX.Element => {
       title: "Submit Application",
       description: "Start by filling the application form for us to review",
       icon: "https://c.animaapp.com/a2afXOmA/img/vector-28.svg",
-      iconPosition: "top-[116px] left-[120px]",
-      contentPosition: "top-[61px] left-[222px]",
-      numberPosition: "top-[181px] left-80",
+      iconPosition: "top-[126px] left-[120px]",
+      contentPosition: "top-[61px] left-[202px]",
+      numberPosition: "top-[181px] left-78",
       width: "w-[173px]",
       titleSize: "text-lg",
     },
@@ -19,9 +19,9 @@ export const ProcessSection = (): React.JSX.Element => {
       description:
         "You then complete an assessment according to your chosen path",
       icon: "https://c.animaapp.com/a2afXOmA/img/vector-30.svg",
-      iconPosition: "top-[186px] left-[425px]",
-      contentPosition: "top-[97px] left-[527px]",
-      numberPosition: "top-[232px] left-[626px]",
+      iconPosition: "top-[176px] left-[425px]",
+      contentPosition: "top-[97px] left-[507px]",
+      numberPosition: "top-[222px] left-[636px]",
       width: "w-[201px]",
       titleSize: "text-lg",
     },
@@ -31,9 +31,9 @@ export const ProcessSection = (): React.JSX.Element => {
       description:
         "Once accepted, you start your learning journey with support",
       icon: "https://c.animaapp.com/a2afXOmA/img/vector-32.svg",
-      iconPosition: "top-[216px] left-[731px]",
+      iconPosition: "top-[216px] left-[751px]",
       contentPosition: "top-[150px] left-[835px]",
-      numberPosition: "top-[275px] left-[931px]",
+      numberPosition: "top-[265px] left-[951px]",
       width: "w-[201px]",
       titleSize: "text-xl",
     },
@@ -43,9 +43,9 @@ export const ProcessSection = (): React.JSX.Element => {
       description:
         "After fulfilling all requirements, you are given a certificate",
       icon: "https://c.animaapp.com/a2afXOmA/img/vector-33.svg",
-      iconPosition: "top-[271px] left-[1035px]",
-      contentPosition: "top-[205px] left-[1139px]",
-      numberPosition: "top-[330px] left-[1235px]",
+      iconPosition: "top-[271px] left-[1065px]",
+      contentPosition: "top-[205px] left-[1149px]",
+      numberPosition: "top-[330px] left-[1275px]",
       width: "w-[201px]",
       titleSize: "text-xl",
     },
@@ -57,7 +57,7 @@ export const ProcessSection = (): React.JSX.Element => {
       data-model-id="4059:1210"
     >
       {/* Main Title */}
-      <div className="w-[750px] h-[143px] flex-shrink-0 ml-[170px] mt-[30px] mb-[30px]">
+      <div className="w-[750px] h-[143px] flex-shrink-0 ml-[170px] mt-[90px] mb-[-40px]">
         <h1 className="font-rebond font-normal text-white text-[70px] tracking-[-1.4px] leading-[120%] text-left">
           Transform your{" "}
           <span
@@ -87,7 +87,7 @@ export const ProcessSection = (): React.JSX.Element => {
       </div>
 
       <div className="w-full h-[1566px]">
-        <div className="relative h-[517px] top-[19px] left-[60px]">
+        <div className="relative h-[517px] top-[115px] left-[60px]">
           {/* SVG Ribbon Background */}
           {/* <div className="absolute left-0 top-1/12 w-[2000px] h-[1085px] opacity-90 z-0 pointer-events-none">
             <svg

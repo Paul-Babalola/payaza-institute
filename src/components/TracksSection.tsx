@@ -317,7 +317,7 @@ export default function TracksSection({
               <div
                 className={`absolute -top-90 pointer-events-none overflow-hidden z-10 ${
                   isProductTrack
-                    ? "-right-320 -top-[235px] scale-x-[-1] scale-y-[-1] w-[80rem] sm:w-[88rem] md:w-[96rem] lg:w-[112rem] xl:w-[128rem] 2xl:w-[144rem] h-[40rem] sm:h-[44rem] md:h-[48rem] lg:h-[56rem] xl:h-[60rem] 2xl:h-[64rem]"
+                    ? "-right-320 -top-[200px] scale-x-[-1] scale-y-[-1] w-[80rem] sm:w-[88rem] md:w-[96rem] lg:w-[112rem] xl:w-[128rem] 2xl:w-[144rem] h-[40rem] sm:h-[44rem] md:h-[48rem] lg:h-[56rem] xl:h-[60rem] 2xl:h-[64rem]"
                     : "-left-220 w-[48rem] sm:w-[56rem] md:w-[64rem] lg:w-[80rem] xl:w-[96rem] 2xl:w-[112rem] h-96 sm:h-[28rem] md:h-[32rem] lg:h-[40rem] xl:h-[48rem] 2xl:h-[56rem]"
                 }`}
               >

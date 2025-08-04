@@ -72,7 +72,7 @@ export const ExpectationsSection = (): React.JSX.Element => {
                   </div>
                 )}
                 {/* Gradient Line */}
-                <div className="w-full h-[12px] mt-3">
+                <div className="w-full h-[12px] mt-1">
                   {openIndex === index ? (
                     <div
                       className="w-full h-[1px]"
@@ -108,7 +108,7 @@ export const ExpectationsSection = (): React.JSX.Element => {
       />
 
       {/* Background Ribbon */}
-      <div className="absolute right-1/52 top-1/52 transform -translate-y-1/2 w-screen h-[1356px] opacity-90 z-0 pointer-events-none">
+      <div className="absolute right-1/52 top-1/10 transform -translate-y-1/2 w-screen h-[1280px] opacity-100 z-0 pointer-events-none">
         <svg
           width="100%"
           height="100%"
