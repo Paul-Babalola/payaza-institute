@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -13,10 +13,15 @@ import {
   useTheme,
   useMediaQuery,
   Container,
+  Menu,
+  MenuItem,
+  Typography,
+  Avatar,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: "rgba(31, 2, 46, 0.54)",
@@ -114,6 +119,52 @@ const SignInButton = styled(Button)({
   "&:hover": {
     backgroundColor: "rgba(128, 255, 114, 0.1)",
     borderColor: "#80FF72",
+  },
+});
+
+const UserButton = styled(Button)({
+  display: "flex",
+  height: "40px",
+  padding: "8px 16px",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "8px",
+  borderRadius: "96px",
+  border: "1px solid #80FF72",
+  color: "#80FF72",
+  fontFamily: "Roobert, -apple-system, Roboto, Helvetica, sans-serif",
+  fontSize: "14px",
+  fontWeight: 500,
+  lineHeight: "16px",
+  textTransform: "none",
+  backgroundColor: "rgba(128, 255, 114, 0.1)",
+  "&:hover": {
+    backgroundColor: "rgba(128, 255, 114, 0.2)",
+    borderColor: "#80FF72",
+  },
+});
+
+const StyledMenu = styled(Menu)({
+  "& .MuiPaper-root": {
+    backgroundColor: "rgba(31, 2, 46, 0.95)",
+    backdropFilter: "blur(10px)",
+    border: "1px solid rgba(128, 255, 114, 0.2)",
+    borderRadius: "12px",
+    marginTop: "8px",
+  },
+});
+
+const StyledMenuItem = styled(MenuItem)({
+  color: "#FFF",
+  fontFamily: "Roobert, -apple-system, Roboto, Helvetica, sans-serif",
+  fontSize: "14px",
+  fontWeight: 400,
+  padding: "12px 16px",
+  "&:hover": {
+    backgroundColor: "rgba(128, 255, 114, 0.1)",
+  },
+  "&.Mui-selected": {
+    backgroundColor: "rgba(128, 255, 114, 0.2)",
   },
 });
 
@@ -226,9 +277,28 @@ const UserIcon = () => (
 
 const PayazaHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(
+    null
+  );
+  const [user, setUser] = useState<{ firstname: string; email: string } | null>(
+    null
+  );
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
+
+  // Check for user authentication on component mount
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    const userEmail = localStorage.getItem("user_email");
+    const userFirstname = localStorage.getItem("user_firstname");
+
+    if (accessToken && userEmail) {
+      // Use stored firstname or fallback to email extraction
+      const firstname = userFirstname || userEmail.split("@")[0];
+      setUser({ firstname, email: userEmail });
+    }
+  }, []);
 
   const navigationItems = [
     { label: "About Us", href: "/about" },
@@ -247,6 +317,23 @@ const PayazaHeader: React.FC = () => {
 
   const handleSignIn = () => {
     navigate("/auth");
+  };
+
+  const handleUserMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setUserMenuAnchor(event.currentTarget);
+  };
+
+  const handleUserMenuClose = () => {
+    setUserMenuAnchor(null);
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user_email");
+    localStorage.removeItem("user_firstname");
+    setUser(null);
+    setUserMenuAnchor(null);
+    navigate("/");
   };
 
   const handleNavigationClick = (href: string) => {
@@ -288,9 +375,40 @@ const PayazaHeader: React.FC = () => {
             {/* Desktop Sign In & Mobile Menu Button */}
             <SignInContainer>
               {!isMobile ? (
-                <SignInButton startIcon={<UserIcon />} onClick={handleSignIn}>
-                  Sign In
-                </SignInButton>
+                user ? (
+                  <UserButton
+                    onClick={handleUserMenuOpen}
+                    endIcon={<KeyboardArrowDownIcon />}
+                  >
+                    <Avatar
+                      sx={{
+                        width: 24,
+                        height: 24,
+                        bgcolor: "rgba(128, 255, 114, 0.2)",
+                        color: "#80FF72",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {user.firstname.charAt(0).toUpperCase()}
+                    </Avatar>
+                    <Typography
+                      sx={{
+                        color: "#80FF72",
+                        fontFamily:
+                          "Roobert, -apple-system, Roboto, Helvetica, sans-serif",
+                        fontSize: "14px",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Hi {user.firstname}
+                    </Typography>
+                  </UserButton>
+                ) : (
+                  <SignInButton startIcon={<UserIcon />} onClick={handleSignIn}>
+                    Sign In
+                  </SignInButton>
+                )
               ) : (
                 <MobileMenuButton
                   onClick={handleMobileMenuToggle}
@@ -339,15 +457,137 @@ const PayazaHeader: React.FC = () => {
         </List>
 
         <Box sx={{ mt: 4 }}>
-          <SignInButton
-            startIcon={<UserIcon />}
-            fullWidth
-            onClick={handleSignIn}
-          >
-            Sign In
-          </SignInButton>
+          {user ? (
+            <>
+              <Box
+                sx={{
+                  mb: 2,
+                  p: 2,
+                  borderBottom: "1px solid rgba(128, 255, 114, 0.2)",
+                }}
+              >
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: 2, mb: 1 }}
+                >
+                  <Avatar
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      bgcolor: "rgba(128, 255, 114, 0.2)",
+                      color: "#80FF72",
+                      fontSize: "14px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {user.firstname.charAt(0).toUpperCase()}
+                  </Avatar>
+                  <Typography
+                    sx={{
+                      color: "#80FF72",
+                      fontFamily:
+                        "Roobert, -apple-system, Roboto, Helvetica, sans-serif",
+                      fontSize: "16px",
+                      fontWeight: 500,
+                    }}
+                  >
+                    Hi {user.firstname}
+                  </Typography>
+                </Box>
+                <Typography
+                  sx={{
+                    color: "rgba(255, 255, 255, 0.7)",
+                    fontFamily:
+                      "Roobert, -apple-system, Roboto, Helvetica, sans-serif",
+                    fontSize: "12px",
+                  }}
+                >
+                  {user.email}
+                </Typography>
+              </Box>
+              <SignInButton
+                fullWidth
+                onClick={handleSignOut}
+                sx={{ color: "#FF6B6B", borderColor: "#FF6B6B" }}
+              >
+                Sign Out
+              </SignInButton>
+            </>
+          ) : (
+            <SignInButton
+              startIcon={<UserIcon />}
+              fullWidth
+              onClick={handleSignIn}
+            >
+              Sign In
+            </SignInButton>
+          )}
         </Box>
       </MobileDrawer>
+
+      {/* User Dropdown Menu */}
+      <StyledMenu
+        anchorEl={userMenuAnchor}
+        open={Boolean(userMenuAnchor)}
+        onClose={handleUserMenuClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <StyledMenuItem onClick={handleUserMenuClose}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              minWidth: 200,
+            }}
+          >
+            <Avatar
+              sx={{
+                width: 32,
+                height: 32,
+                bgcolor: "rgba(128, 255, 114, 0.2)",
+                color: "#80FF72",
+                fontSize: "14px",
+                fontWeight: 600,
+              }}
+            >
+              {user?.firstname.charAt(0).toUpperCase()}
+            </Avatar>
+            <Box>
+              <Typography
+                sx={{
+                  color: "#80FF72",
+                  fontFamily:
+                    "Roobert, -apple-system, Roboto, Helvetica, sans-serif",
+                  fontSize: "14px",
+                  fontWeight: 500,
+                }}
+              >
+                {user?.firstname}
+              </Typography>
+              <Typography
+                sx={{
+                  color: "rgba(255, 255, 255, 0.7)",
+                  fontFamily:
+                    "Roobert, -apple-system, Roboto, Helvetica, sans-serif",
+                  fontSize: "12px",
+                }}
+              >
+                {user?.email}
+              </Typography>
+            </Box>
+          </Box>
+        </StyledMenuItem>
+        <StyledMenuItem onClick={handleSignOut} sx={{ color: "#FF6B6B" }}>
+          Sign Out
+        </StyledMenuItem>
+      </StyledMenu>
 
       {/* Spacer to prevent content from being hidden under fixed header */}
       <Box sx={{ height: { xs: "72px", md: "88px" } }} />

@@ -243,6 +243,12 @@ const AuthPage: React.FC = () => {
     setIsLoading(true);
 
     try {
+      console.log("Making login request to:", API_ENDPOINTS.LOGIN);
+      console.log("Request payload:", {
+        email: loginForm.email,
+        password: loginForm.password,
+      });
+
       const response = await fetch(API_ENDPOINTS.LOGIN, {
         method: "POST",
         headers: API_CONFIG.headers,
@@ -252,12 +258,38 @@ const AuthPage: React.FC = () => {
         }),
       });
 
-      const data = await response.json();
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+
+      const responseText = await response.text();
+      console.log("Response text:", responseText);
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON parse error:", parseError);
+        throw new Error("Invalid JSON response from server");
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || `HTTP error! status: ${response.status}`
+        );
+      }
 
       if (data.status) {
         // Store the access token
         localStorage.setItem("access_token", data.data.access_token);
         localStorage.setItem("user_email", data.data.email);
+
+        // Try to get stored firstname, or extract from email
+        const storedFirstname = localStorage.getItem("user_firstname");
+        if (!storedFirstname) {
+          // Fallback: extract firstname from email
+          const firstname = data.data.email.split("@")[0];
+          localStorage.setItem("user_firstname", firstname);
+        }
 
         // Show success message
         alert("Login successful! Welcome back.");
@@ -269,7 +301,9 @@ const AuthPage: React.FC = () => {
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Login failed: Please check your connection and try again.");
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      alert(`Login failed: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }
@@ -294,6 +328,14 @@ const AuthPage: React.FC = () => {
     }
 
     try {
+      console.log("Making registration request to:", API_ENDPOINTS.REGISTER);
+      console.log("Request payload:", {
+        email: registerForm.email,
+        password: registerForm.password,
+        firstname: registerForm.firstname,
+        lastname: registerForm.lastname,
+      });
+
       const response = await fetch(API_ENDPOINTS.REGISTER, {
         method: "POST",
         headers: API_CONFIG.headers,
@@ -305,9 +347,30 @@ const AuthPage: React.FC = () => {
         }),
       });
 
-      const data = await response.json();
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+
+      const responseText = await response.text();
+      console.log("Response text:", responseText);
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON parse error:", parseError);
+        throw new Error("Invalid JSON response from server");
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || `HTTP error! status: ${response.status}`
+        );
+      }
 
       if (data.status) {
+        // Store the firstname for future use
+        localStorage.setItem("user_firstname", registerForm.firstname);
+
         // Show success message
         alert(
           data.message ||
@@ -330,7 +393,9 @@ const AuthPage: React.FC = () => {
       }
     } catch (error) {
       console.error("Registration error:", error);
-      alert("Registration failed: Please check your connection and try again.");
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      alert(`Registration failed: ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }

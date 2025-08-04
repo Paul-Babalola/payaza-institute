@@ -1,7 +1,6 @@
 import React from "react";
 import Navigation from "./Navigation";
-// import HeroSection from './HeroSection';
-// import AboutSection from './AboutSection';
+import HeroSection from "./HeroSection";
 import TracksPage from "./TracksPage";
 import PartnersSection from "./PartnerSection";
 import { ProcessSection } from "./ProcessSection";
@@ -11,10 +10,9 @@ import Footer from "./Footer";
 
 const PayazaLandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#21032F] to-[#1B0029] overflow-hidden">
+    <div className="overflow-hidden">
       <Navigation />
-      {/* <HeroSection />
-      <AboutSection />/>*/}
+      <HeroSection />
       <TracksPage />
       <PartnersSection />
       <ProcessSection />

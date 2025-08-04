@@ -115,8 +115,8 @@ export const ExpectationsSection = (): React.JSX.Element => {
         </div>
       </div>
 
-      {/* Background Ribbon */}
-      <div className="absolute right-0 top-2 transform -translate-y-1/2 w-full h-[800px] sm:h-[1000px] lg:h-[1200px] xl:h-[1280px] opacity-100 z-0 pointer-events-none overflow-hidden">
+      {/* Background Ribbon - Hidden for small screens */}
+      <div className="hidden lg:block absolute right-0 top-2 transform -translate-y-1/2 w-full h-[800px] sm:h-[1000px] lg:h-[1200px] xl:h-[1280px] opacity-100 z-0 pointer-events-none overflow-hidden">
         <svg
           width="100%"
           height="100%"
