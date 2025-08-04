@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -227,6 +228,7 @@ const PayazaHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate();
 
   const navigationItems = [
     { label: "About Us", href: "/about" },
@@ -241,6 +243,10 @@ const PayazaHeader: React.FC = () => {
 
   const handleMobileMenuClose = () => {
     setMobileMenuOpen(false);
+  };
+
+  const handleSignIn = () => {
+    navigate("/auth");
   };
 
   return (
@@ -265,7 +271,9 @@ const PayazaHeader: React.FC = () => {
             {/* Desktop Sign In & Mobile Menu Button */}
             <SignInContainer>
               {!isMobile ? (
-                <SignInButton startIcon={<UserIcon />}>Sign In</SignInButton>
+                <SignInButton startIcon={<UserIcon />} onClick={handleSignIn}>
+                  Sign In
+                </SignInButton>
               ) : (
                 <MobileMenuButton
                   onClick={handleMobileMenuToggle}
@@ -307,7 +315,11 @@ const PayazaHeader: React.FC = () => {
         </List>
 
         <Box sx={{ mt: 4 }}>
-          <SignInButton startIcon={<UserIcon />} fullWidth>
+          <SignInButton
+            startIcon={<UserIcon />}
+            fullWidth
+            onClick={handleSignIn}
+          >
             Sign In
           </SignInButton>
         </Box>

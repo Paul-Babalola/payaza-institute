@@ -2,7 +2,7 @@ import React from "react";
 import Navigation from "./Navigation";
 // import HeroSection from './HeroSection';
 // import AboutSection from './AboutSection';
-// import TracksSection from "./TracksSection";
+import TracksPage from "./TracksPage";
 import PartnersSection from "./PartnerSection";
 import { ProcessSection } from "./ProcessSection";
 import { ExpectationsSection } from "./ExpectationsSection";
@@ -15,7 +15,7 @@ const PayazaLandingPage: React.FC = () => {
       <Navigation />
       {/* <HeroSection />
       <AboutSection />/>*/}
-      {/* <TracksSection /> */}
+      <TracksPage />
       <PartnersSection />
       <ProcessSection />
       <ExpectationsSection key="expectations-v2" />
