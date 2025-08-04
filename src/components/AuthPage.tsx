@@ -32,7 +32,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
 }));
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
+const StyledTextField = styled(TextField)(() => ({
   "& .MuiOutlinedInput-root": {
     color: "#FFF",
     fontFamily:
@@ -62,7 +62,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const StyledButton = styled(Button)(({ theme }) => ({
+const StyledButton = styled(Button)(() => ({
   background: "linear-gradient(135deg, #80FF72 0%, #22c55e 100%)",
   color: "#1F022E",
   fontFamily:
@@ -86,7 +86,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const StyledTabs = styled(Tabs)(({ theme }) => ({
+const StyledTabs = styled(Tabs)(() => ({
   "& .MuiTabs-indicator": {
     backgroundColor: "#80FF72",
     height: "3px",
@@ -216,7 +216,7 @@ const AuthPage: React.FC = () => {
     confirmPassword: "",
   });
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
