@@ -232,9 +232,9 @@ const PayazaHeader: React.FC = () => {
 
   const navigationItems = [
     { label: "About Us", href: "/about" },
-    { label: "Tracks", href: "/tracks" },
-    { label: "How it works", href: "/how-it-works" },
-    { label: "FAQs", href: "/faq" },
+    { label: "Tracks", href: "#tracks" },
+    { label: "How it works", href: "#process" },
+    { label: "FAQs", href: "#faq" },
   ];
 
   const handleMobileMenuToggle = () => {
@@ -247,6 +247,19 @@ const PayazaHeader: React.FC = () => {
 
   const handleSignIn = () => {
     navigate("/auth");
+  };
+
+  const handleNavigationClick = (href: string) => {
+    if (href.startsWith("#")) {
+      // Handle anchor links with smooth scrolling
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Handle regular navigation
+      navigate(href);
+    }
   };
 
   return (
@@ -262,7 +275,11 @@ const PayazaHeader: React.FC = () => {
             {/* Desktop Navigation */}
             <NavigationContainer>
               {navigationItems.map((item) => (
-                <NavLink key={item.label} href={item.href}>
+                <NavLink
+                  key={item.label}
+                  onClick={() => handleNavigationClick(item.href)}
+                  sx={{ cursor: "pointer" }}
+                >
                   {item.label}
                 </NavLink>
               ))}
@@ -304,8 +321,15 @@ const PayazaHeader: React.FC = () => {
             <ListItem key={item.label} sx={{ px: 0 }}>
               <ListItemText>
                 <NavLink
-                  href={item.href}
-                  sx={{ width: "100%", justifyContent: "flex-start" }}
+                  onClick={() => {
+                    handleNavigationClick(item.href);
+                    handleMobileMenuClose();
+                  }}
+                  sx={{
+                    width: "100%",
+                    justifyContent: "flex-start",
+                    cursor: "pointer",
+                  }}
                 >
                   {item.label}
                 </NavLink>

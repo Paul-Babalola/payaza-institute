@@ -373,7 +373,7 @@ const PayazaFooter: React.FC = () => {
               gap: isSmall ? 2 : 0,
             }}
           >
-            <CopyrightText>© Copyright 2024, All Rights Reserved</CopyrightText>
+            <CopyrightText>© Copyright 2025, All Rights Reserved</CopyrightText>
             <Box sx={{ display: "flex", gap: 4 }}>
               <BottomLink>Privacy Policy</BottomLink>
               <BottomLink>Terms & Conditions</BottomLink>

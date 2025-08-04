@@ -259,6 +259,7 @@ const PayazaFAQ: React.FC = () => {
 
   return (
     <div
+      id="faq"
       className="flex flex-col items-center justify-center"
       style={{
         backgroundImage: "url('/src/assets/BG.png')",

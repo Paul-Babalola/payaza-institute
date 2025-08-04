@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { ArrowRight, Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import { API_ENDPOINTS, API_CONFIG } from "../config/api";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   minHeight: "100vh",
@@ -210,7 +211,8 @@ const AuthPage: React.FC = () => {
   });
 
   const [registerForm, setRegisterForm] = useState({
-    name: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -240,24 +242,98 @@ const AuthPage: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Login attempt:", loginForm);
+    try {
+      const response = await fetch(API_ENDPOINTS.LOGIN, {
+        method: "POST",
+        headers: API_CONFIG.headers,
+        body: JSON.stringify({
+          email: loginForm.email,
+          password: loginForm.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.status) {
+        // Store the access token
+        localStorage.setItem("access_token", data.data.access_token);
+        localStorage.setItem("user_email", data.data.email);
+
+        // Show success message
+        alert("Login successful! Welcome back.");
+
+        // Redirect to dashboard or home page
+        window.location.href = "/";
+      } else {
+        alert("Login failed: " + (data.message || "Invalid credentials"));
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Login failed: Please check your connection and try again.");
+    } finally {
       setIsLoading(false);
-      // Here you would typically handle authentication
-    }, 2000);
+    }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Register attempt:", registerForm);
+    // Validate password confirmation
+    if (registerForm.password !== registerForm.confirmPassword) {
+      alert("Passwords do not match!");
       setIsLoading(false);
-      // Here you would typically handle registration
-    }, 2000);
+      return;
+    }
+
+    // Validate password length
+    if (registerForm.password.length < 6) {
+      alert("Password must be at least 6 characters long!");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(API_ENDPOINTS.REGISTER, {
+        method: "POST",
+        headers: API_CONFIG.headers,
+        body: JSON.stringify({
+          email: registerForm.email,
+          password: registerForm.password,
+          firstname: registerForm.firstname,
+          lastname: registerForm.lastname,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.status) {
+        // Show success message
+        alert(
+          data.message ||
+            "Registration successful! Please check your email for confirmation."
+        );
+
+        // Clear form
+        setRegisterForm({
+          firstname: "",
+          lastname: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+
+        // Switch to login tab
+        setTabValue(0);
+      } else {
+        alert("Registration failed: " + (data.message || "Please try again"));
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Registration failed: Please check your connection and try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -389,9 +465,21 @@ const AuthPage: React.FC = () => {
           <Box component="form" onSubmit={handleRegister} sx={{ mt: 2 }}>
             <StyledTextField
               fullWidth
-              label="Full Name"
-              value={registerForm.name}
-              onChange={handleRegisterChange("name")}
+              label="First Name"
+              value={registerForm.firstname}
+              onChange={handleRegisterChange("firstname")}
+              InputProps={{
+                startAdornment: <User size={20} style={{ marginRight: 8 }} />,
+              }}
+              sx={{ mb: 3 }}
+              required
+            />
+
+            <StyledTextField
+              fullWidth
+              label="Last Name"
+              value={registerForm.lastname}
+              onChange={handleRegisterChange("lastname")}
               InputProps={{
                 startAdornment: <User size={20} style={{ marginRight: 8 }} />,
               }}

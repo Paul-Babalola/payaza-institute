@@ -10,14 +10,16 @@ export default function TracksPage() {
     setCurrentTrack(track);
   };
 
-  // Auto-navigate to Product track after 30 seconds
+  // Infinite track transitions every 10 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCurrentTrack("product");
-    }, 30000); // 30 seconds
+      setCurrentTrack(
+        currentTrack === "engineering" ? "product" : "engineering"
+      );
+    }, 10000); // 10 seconds
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [currentTrack]); // Re-run when currentTrack changes
 
   return (
     <div className="relative">

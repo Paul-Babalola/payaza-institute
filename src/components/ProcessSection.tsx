@@ -53,11 +53,12 @@ export const ProcessSection = (): React.JSX.Element => {
 
   return (
     <div
+      id="process"
       className="w-full h-[859px] bg-[#1d012b] overflow-hidden text-center"
       data-model-id="4059:1210"
     >
       {/* Main Title */}
-      <div className="w-[750px] h-[143px] flex-shrink-0 ml-[170px] mt-[90px] mb-[-40px]">
+      <div className="w-[750px] h-[143px] flex-shrink-0 ml-[170px] mt-[50px] mb-[-15px]">
         <h1 className="font-rebond font-normal text-white text-[70px] tracking-[-1.4px] leading-[120%] text-left">
           Transform your{" "}
           <span
@@ -87,7 +88,7 @@ export const ProcessSection = (): React.JSX.Element => {
       </div>
 
       <div className="w-full h-[1566px]">
-        <div className="relative h-[517px] top-[115px] left-[60px]">
+        <div className="relative h-[517px] top-[45px] left-[60px]">
           {/* SVG Ribbon Background */}
           {/* <div className="absolute left-0 top-1/12 w-[2000px] h-[1085px] opacity-90 z-0 pointer-events-none">
             <svg

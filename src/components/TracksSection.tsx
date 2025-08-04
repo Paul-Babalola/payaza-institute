@@ -1,4 +1,5 @@
 import { Calendar, Monitor, CheckCircle, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import EngineeringImage from "../assets/Engineering.jpg";
 // Fallback to Engineering image if Product image fails to load
 import ProductImage from "../assets/product.jpg";
@@ -12,6 +13,7 @@ export default function TracksSection({
   track,
   onTrackChange,
 }: TracksSectionProps) {
+  const navigate = useNavigate();
   const isProductTrack = track === "product";
 
   const trackData = {
@@ -66,8 +68,19 @@ export default function TracksSection({
     }
   };
 
+  const handleApplyNow = () => {
+    // Save the selected track to localStorage
+    localStorage.setItem(
+      "selectedTrack",
+      isProductTrack ? "Product and Design Track" : "Engineering Track"
+    );
+    // Navigate to the application form
+    navigate("/apply");
+  };
+
   return (
     <div
+      id="tracks"
       className={`min-h-screen ${currentTrack.background} px-4 py-12 md:px-8 lg:px-16 xl:px-32 transition-all duration-500`}
     >
       <div className="mx-auto max-w-6xl mt-10">
@@ -81,6 +94,23 @@ export default function TracksSection({
             <>
               {/* Progress Indicators - Left side for Product track */}
               <div className="flex items-center gap-4 sm:gap-6 mr-8 sm:mr-16 md:mr-24 lg:mr-32 xl:mr-110">
+                <button
+                  onClick={handleNextTrack}
+                  className={`flex items-center gap-2 pb-2 border-b-2 border-white/30 px-2 hover:border-white/50 transition-colors cursor-pointer ${
+                    isProductTrack ? "hover:bg-white/10" : "hover:bg-black/10"
+                  } rounded-t-md`}
+                >
+                  <span
+                    className={`${
+                      isProductTrack ? "text-white/60" : "text-black/60"
+                    } text-lg font-medium hover:${
+                      isProductTrack ? "text-white/80" : "text-black/80"
+                    } transition-colors`}
+                    style={{ fontFamily: "var(--font-rebond)" }}
+                  >
+                    01
+                  </span>
+                </button>
                 <div
                   className={`flex items-center gap-2 pb-2 border-b-2 ${currentTrack.progressColor}`}
                 >
@@ -97,23 +127,6 @@ export default function TracksSection({
                     {currentTrack.trackName}
                   </span>
                 </div>
-                <button
-                  onClick={handleNextTrack}
-                  className={`flex items-center gap-2 pb-2 border-b-2 border-white/30 px-2 hover:border-white/50 transition-colors cursor-pointer ${
-                    isProductTrack ? "hover:bg-white/10" : "hover:bg-black/10"
-                  } rounded-t-md`}
-                >
-                  <span
-                    className={`${
-                      isProductTrack ? "text-white/60" : "text-black/60"
-                    } text-lg font-medium hover:${
-                      isProductTrack ? "text-white/80" : "text-black/80"
-                    } transition-colors`}
-                    style={{ fontFamily: "var(--font-rebond)" }}
-                  >
-                    {currentTrack.nextTrack}
-                  </span>
-                </button>
               </div>
 
               {/* CHOOSE YOUR PATH - Positioned where title starts for Product track */}
@@ -282,6 +295,7 @@ export default function TracksSection({
                 background: currentTrack.buttonGradient,
                 cursor: "pointer",
               }}
+              onClick={handleApplyNow}
             >
               <span
                 className={`font-medium ${currentTrack.buttonTextColor}`}
