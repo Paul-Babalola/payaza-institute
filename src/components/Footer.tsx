@@ -341,14 +341,14 @@ const PayazaFooter: React.FC = () => {
                 </Box>
 
                 {/* Resources */}
-                <Box sx={{ flex: { sm: "0 0 33.333%" } }}>
+                {/* <Box sx={{ flex: { sm: "0 0 33.333%" } }}>
                   <SectionTitle>Resources</SectionTitle>
                   <Box>
                     <FooterLink>Demo</FooterLink>
                     <FooterLink>Documentation</FooterLink>
                     <FooterLink>Developers</FooterLink>
                   </Box>
-                </Box>
+                </Box> */}
 
                 {/* Company */}
                 <Box sx={{ flex: { sm: "0 0 33.333%" } }}>

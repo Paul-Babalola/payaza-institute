@@ -330,13 +330,37 @@ const PayazaHeader: React.FC = () => {
     setUserMenuAnchor(null);
   };
 
-  const handleSignOut = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("user_email");
-    localStorage.removeItem("user_firstname");
-    setUser(null);
-    setUserMenuAnchor(null);
-    navigate("/");
+  const handleSignOut = async () => {
+    const token = localStorage.getItem("access_token");
+
+    try {
+      const response = await fetch(
+        "https://institute.dev.payaza.africa/auth/logout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const result = await response.json();
+
+      if (response.ok && result.status) {
+        // Logout successful
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("user_email");
+        localStorage.removeItem("user_firstname");
+        setUser(null);
+        setUserMenuAnchor(null);
+        navigate("/");
+      } else {
+        console.error("Logout failed:", result.message || "Unknown error");
+      }
+    } catch (error) {
+      console.error("Logout request failed:", error);
+    }
   };
 
   const handleNavigationClick = (href: string) => {
