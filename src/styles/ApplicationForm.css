@@ -211,7 +211,7 @@
   align-items: center;
   gap: 16px;
   flex: 1;
-  justify-content: center;
+  justify-content: end;
 }
 
 .application-form-container .step-icon {
@@ -440,7 +440,7 @@
 .application-form-container .form-section-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: flex-start;
   gap: 12px;
 }
 
@@ -1176,7 +1176,7 @@
   .application-form-container .step-info {
     order: 1;
     width: 100%;
-    justify-content: center;
+    justify-content: end;
   }
 
   .application-form-container .exit-section {

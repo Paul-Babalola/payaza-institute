@@ -123,7 +123,7 @@ const MotivationGoals: React.FC = () => {
           <span className="exit-text hidden sm:inline">Exit Application</span>
         </div>
         <div className="separator hidden sm:block"></div>
-        <div className="step-info">
+        <div className="step-info md:justify-end">
           <div className="step-details">
             <div className="step-label">STEP 4/4</div>
             <div className="step-title">Motivation & Goals</div>
@@ -176,7 +176,7 @@ const MotivationGoals: React.FC = () => {
         {/* Main Form */}
         <div className="main-form">
           <div className="form-section-header">
-            <h2 className="section-title">Motivation & Goals</h2>
+            <h2 className="section-title text-left">Motivation & Goals</h2>
             <p className="section-subtitle">
               Tell us a bit about your motivation and goals (250 words max)
             </p>

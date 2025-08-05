@@ -192,8 +192,8 @@ const Background: React.FC = () => {
           </svg>
           <span className="exit-text hidden sm:inline">Exit Application</span>
         </div>
-        <div className="separator hidden sm:block"></div>
-        <div className="step-info">
+        {/* <div className="separator hidden sm:block"></div> */}
+        <div className="step-info md:justify-end">
           <div className="step-details">
             <div className="step-label">STEP 3/4</div>
             <div className="step-title">Background</div>

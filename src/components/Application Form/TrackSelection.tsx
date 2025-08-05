@@ -69,8 +69,8 @@ const TrackSelection: React.FC = () => {
           <span className="exit-text hidden sm:inline">Exit Application</span>
         </div>
         <div className="separator hidden sm:block"></div>
-        <div className="step-info">
-          <div className="step-details">
+        <div className="step-info md:justify-end">
+          <div className="step-details ">
             <div className="step-label">STEP 2/4</div>
             <div className="step-title">Track Selection</div>
           </div>

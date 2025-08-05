@@ -81,14 +81,13 @@ const PersonalInformation: React.FC = () => {
       </div>
 
       {/* Header */}
-      <div className="form-header">
+      <div className="form-header flex items-center justify-between px-6 py-4 lg:px-8 lg:py-5">
         <div
-          className="exit-section"
+          className="exit-section flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
           onClick={handleExit}
-          style={{ cursor: "pointer" }}
         >
           <svg
-            className="close-icon"
+            className="close-icon w-5 h-5"
             width="16"
             height="24"
             viewBox="0 0 16 24"
@@ -109,15 +108,21 @@ const PersonalInformation: React.FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="exit-text hidden sm:inline">Exit Application</span>
+          <span className="exit-text hidden sm:inline text-sm font-medium text-gray-700">
+            Exit Application
+          </span>
         </div>
-        <div className="separator hidden sm:block"></div>
-        <div className="step-info">
-          <div className="step-details">
-            <div className="step-label">STEP 1/4</div>
-            <div className="step-title">Personal Information</div>
+        {/* <div className="separator hidden sm:block w-px h-6 bg-gray-300 mx-4"></div> */}
+        <div className="step-info flex md:justify-end items-center gap-4 flex-1 justify-end">
+          <div className="step-details flex flex-col items-center text-center justify-end">
+            <div className="step-label text-xs font-medium text-gray-500 uppercase tracking-wide">
+              STEP 1/4
+            </div>
+            <div className="step-title text-sm font-semibold text-gray-900 mt-1">
+              Personal Information
+            </div>
           </div>
-          <div className="step-icon">
+          <div className="step-icon flex items-center justify-center w-9 h-9">
             <svg
               width="36"
               height="36"
