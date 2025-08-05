@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ApplicationForm.css";
-import "../ui/StyledSelect";
+import { StyledSelect1 } from "../ui/EducationSelect";
+import { StyledSelect } from "../ui/StyledSelect";
 
 const Background: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -71,6 +72,15 @@ const Background: React.FC = () => {
       "Linux",
     ],
   };
+
+  // Education level options
+  const educationOptions = [
+    { key: "Student", name: "Student" },
+    { key: "High School", name: "High School" },
+    { key: "Bachelor's", name: "Bachelor's" },
+    { key: "Master's", name: "Master's" },
+    { key: "PhD", name: "PhD" },
+  ];
 
   // Load data on component mount
   React.useEffect(() => {
@@ -146,6 +156,28 @@ const Background: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleEducationChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, educationLevel: value }));
+  };
+
+  const handleSkillChange = (value: string) => {
+    if (value && !formData.technicalSkills.includes(value)) {
+      setFormData((prev) => ({
+        ...prev,
+        technicalSkills: [...prev.technicalSkills, value],
+      }));
+    }
+  };
+
+  const handleToolChange = (value: string) => {
+    if (value && !formData.tools.includes(value)) {
+      setFormData((prev) => ({
+        ...prev,
+        tools: [...prev.tools, value],
+      }));
+    }
+  };
+
   const removeSkill = (
     skillToRemove: string,
     type: "technicalSkills" | "tools"
@@ -203,6 +235,17 @@ const Background: React.FC = () => {
     trackSkills[selectedTrack] || trackSkills["Engineering Track"];
   const currentTrackTools =
     trackTools[selectedTrack] || trackTools["Engineering Track"];
+
+  // Convert skills and tools to options format
+  const skillOptions = currentTrackSkills.map((skill) => ({
+    key: skill,
+    name: skill,
+  }));
+
+  const toolOptions = currentTrackTools.map((tool) => ({
+    key: tool,
+    name: tool,
+  }));
 
   return (
     <div className="application-form-container">
@@ -330,29 +373,24 @@ const Background: React.FC = () => {
               <label>Years of Experience</label>
             </div>
 
-            <div className="form-row">
-              <div className="form-field">
-                <select
-                  name="educationLevel"
-                  value={formData.educationLevel}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Select Education Level</option>
-                  <option value="Student">Student</option>
-                  <option value="High School">High School</option>
-                  <option value="Bachelor's">Bachelor's</option>
-                  <option value="Master's">Master's</option>
-                  <option value="PhD">PhD</option>
-                </select>
-                <label>Education Level</label>
+            <div className="form-row" style={{ display: "flex", gap: "1rem" }}>
+              <div style={{ flex: 1, position: "relative", width: "54.7vw" }}>
+                <StyledSelect1
+                  label=""
+                  selectedKey={formData.educationLevel}
+                  onSelectionChange={handleEducationChange}
+                  options={educationOptions}
+                  // style={{ width: "100%" }}
+                />
               </div>
-              <div className="form-field">
+              <div className="form-field" style={{ flex: 1, width: "54.7vw" }}>
                 <input
                   type="text"
                   name="fieldOfStudy"
                   placeholder="Field of Study"
                   value={formData.fieldOfStudy}
                   onChange={handleInputChange}
+                  style={{ width: "100%" }}
                 />
                 <label>Field of Study</label>
               </div>
@@ -389,31 +427,11 @@ const Background: React.FC = () => {
                     Technical Skills ({selectedTrack})
                   </span>
                 </div>
-                <select
-                  className="skills-select"
-                  value=""
-                  onChange={(e) => {
-                    if (
-                      e.target.value &&
-                      !formData.technicalSkills.includes(e.target.value)
-                    ) {
-                      setFormData((prev) => ({
-                        ...prev,
-                        technicalSkills: [
-                          ...prev.technicalSkills,
-                          e.target.value,
-                        ],
-                      }));
-                    }
-                  }}
-                >
-                  <option value="">Select a skill...</option>
-                  {currentTrackSkills.map((skill) => (
-                    <option key={skill} value={skill}>
-                      {skill}
-                    </option>
-                  ))}
-                </select>
+                <StyledSelect
+                  selectedKey=""
+                  onSelectionChange={handleSkillChange}
+                  options={skillOptions}
+                />
                 {formData.technicalSkills.length > 0 && (
                   <div className="skills-tags-container">
                     {formData.technicalSkills.map((skill) => (
@@ -453,29 +471,11 @@ const Background: React.FC = () => {
                     Tools ({selectedTrack})
                   </span>
                 </div>
-                <select
-                  className="skills-select"
-                  value=""
-                  onChange={(e) => {
-                    if (
-                      e.target.value &&
-                      !formData.tools.includes(e.target.value)
-                    ) {
-                      setFormData((prev) => ({
-                        ...prev,
-                        tools: [...prev.tools, e.target.value],
-                      }));
-                    }
-                  }}
-                  style={{ width: "54.7vw" }}
-                >
-                  <option value="">Select a tool...</option>
-                  {currentTrackTools.map((tool) => (
-                    <option key={tool} value={tool}>
-                      {tool}
-                    </option>
-                  ))}
-                </select>
+                <StyledSelect
+                  selectedKey=""
+                  onSelectionChange={handleToolChange}
+                  options={toolOptions}
+                />
                 {formData.tools.length > 0 && (
                   <div className="skills-tags-container">
                     {formData.tools.map((tool) => (
