@@ -101,7 +101,7 @@ const SignInContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-const SignInButton = styled(Button)({
+const SignInButton = styled(Button)(({ theme }) => ({
   display: "flex",
   height: "40px",
   padding: "16px",
@@ -120,7 +120,10 @@ const SignInButton = styled(Button)({
     backgroundColor: "rgba(128, 255, 114, 0.1)",
     borderColor: "#80FF72",
   },
-});
+  [theme.breakpoints.down("md")]: {
+    justifyContent: "flex-start",
+  },
+}));
 
 const UserButton = styled(Button)({
   display: "flex",
@@ -301,7 +304,7 @@ const PayazaHeader: React.FC = () => {
   }, []);
 
   const navigationItems = [
-    { label: "About Us", href: "/about" },
+    { label: "About Us", href: "#about" },
     { label: "Tracks", href: "#tracks" },
     { label: "How it works", href: "#process" },
     { label: "FAQs", href: "#faq" },

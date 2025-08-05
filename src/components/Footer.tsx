@@ -218,23 +218,30 @@ const PayazaFooter: React.FC = () => {
   );
 
   const EmailIcon = () => (
-    <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+    <svg
+      width="20"
+      height="16"
+      viewBox="0 0 20 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
-        d="M1.49829 0.88208L4.42498 2.68647C5.39071 3.28187 6.60962 3.28187 7.57535 2.68647L10.502 0.88208"
-        stroke="currentColor"
+        d="M5.49829 5.88208L8.42498 7.68647C9.39071 8.28187 10.6096 8.28187 11.5754 7.68647L14.502 5.88208"
+        stroke="#180124"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <rect
-        x="0"
-        y="0"
-        width="18"
-        height="14"
+        x="0.996338"
+        y="1.13013"
+        width="18.0075"
+        height="14.0058"
         rx="3"
-        fill="none"
-        stroke="currentColor"
+        stroke="#180124"
         strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

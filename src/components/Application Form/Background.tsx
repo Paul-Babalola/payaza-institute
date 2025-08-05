@@ -190,15 +190,15 @@ const Background: React.FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="exit-text">Exit Application</span>
+          <span className="exit-text hidden sm:inline">Exit Application</span>
         </div>
-        <div className="separator"></div>
-        <div className="step-info" style={{ marginLeft: "-10rem" }}>
+        <div className="separator hidden sm:block"></div>
+        <div className="step-info">
           <div className="step-details">
             <div className="step-label">STEP 3/4</div>
             <div className="step-title">Background</div>
           </div>
-          <div className="relative w-9 h-9">
+          <div className="step-icon">
             <svg
               width="36"
               height="36"

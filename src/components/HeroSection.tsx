@@ -1,8 +1,9 @@
 import BGImage from "../assets/BG.png";
+import Ribbon from "../assets/Ribbon.png";
 
 export default function Index() {
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="relative overflow-hidden" style={{ minHeight: "1310px" }}>
       {/* Background Image and Gradient */}
       <div className="absolute inset-0">
         {/* Background Image */}
@@ -19,6 +20,23 @@ export default function Index() {
             opacity: 0.1,
           }}
         ></div>
+
+        {/* Bottom Right Ribbon */}
+        <div
+          className="hidden lg:block absolute bottom-0 pointer-events-none z-0"
+          style={{ right: "-192px" }}
+        >
+          <img
+            src={Ribbon}
+            alt="Decorative Ribbon"
+            className="w-auto h-auto max-w-none"
+            style={{
+              width: "2090px",
+              height: "1755px",
+              top: "-10px",
+            }}
+          />
+        </div>
       </div>
 
       <div className="relative z-10 min-h-screen flex flex-col lg:flex-row items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-0">
@@ -44,17 +62,13 @@ export default function Index() {
         </div>
 
         {/* Content */}
-        <div className="w-full lg:mt-[-100px] lg:w-1/2 lg:pl-4 xl:pl-8 text-left">
+        <div className="w-full lg:mt-[-180px] lg:w-1/2 lg:pl-4 xl:pl-8 text-left">
           {/* Main Heading */}
           <h1
-            className="mb-4 sm:mb-6 lg:mb-8 text-center lg:text-left"
+            className="mb-4 sm:pl-0 md:pl-0 sm:mb-6 lg:mb-8 text-center lg:text-left w-full flex flex-col justify-center items-center lg:items-start lg:min-w-[710px]"
             style={{
-              display: "flex",
-              width: "140%",
-              maxWidth: "710px",
+              minWidth: "130%",
               minHeight: "80px",
-              flexDirection: "column",
-              justifyContent: "center",
               flexShrink: 0,
               marginTop: "0px",
             }}
@@ -64,7 +78,7 @@ export default function Index() {
               style={{
                 color: "#FFF",
                 fontFamily: "Rebond Grotesque",
-                fontSize: "clamp(32px, 8vw, 70px)",
+                fontSize: "clamp(28px, 6vw, 70px)",
                 fontStyle: "normal",
                 fontWeight: 400,
                 lineHeight: "120%",
@@ -81,7 +95,7 @@ export default function Index() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 fontFamily: "Rebond Grotesque",
-                fontSize: "clamp(32px, 8vw, 70px)",
+                fontSize: "clamp(28px, 6vw, 70px)",
                 fontStyle: "italic",
                 fontWeight: 600,
                 lineHeight: "120%",
@@ -152,7 +166,7 @@ export default function Index() {
           </div>
 
           {/* About Us Section */}
-          <div className="space-y-4 sm:space-y-6">
+          <div id="about" className="space-y-4 sm:space-y-6 mt-[100px]">
             <h2 className="text-base sm:text-lg font-rebond-grotesque font-semibold italic text-[#80ff72] leading-[1.5] text-center lg:text-left">
               ABOUT US
             </h2>
@@ -168,9 +182,9 @@ export default function Index() {
                 }}
                 className="text-center lg:text-left"
               >
-                Payaza Institute is Africa's first fintech training academy,
-                designed to meet the specialized education needs of the
-                continent's rapidly growing sector.
+                Africa's first dedicated fintech training academy. We provide
+                the specialized education that Africa's rapidly growing
+                financial technology sector demands.
               </p>
               <p
                 style={{
@@ -183,9 +197,9 @@ export default function Index() {
                 }}
                 className="text-center lg:text-left"
               >
-                Through expert-led training, industry insights, and practical
-                application, we prepare future leaders to navigate complexity
-                and build solutions for Africa's diverse markets.
+                Through comprehensive training, industry insights, and practical
+                application, we prepare leaders who can navigate complexity and
+                create solutions that serve Africa's diverse markets.
               </p>
             </div>
           </div>
