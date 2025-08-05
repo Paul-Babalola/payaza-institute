@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ApplicationForm.css";
+import { StyledSelect } from "../ui/StyledSelect";
 
 const TrackSelection: React.FC = () => {
   const navigate = useNavigate();
@@ -12,8 +13,14 @@ const TrackSelection: React.FC = () => {
       setError("Please select a track to continue");
       return;
     }
-    // Save selected track to localStorage
-    localStorage.setItem("selectedTrack", selectedTrack);
+
+    // Save selected track with correct structure
+    const trackData = {
+      selected_track: selectedTrack, // Optional if you need to use it later
+    };
+
+    localStorage.setItem("trackData", JSON.stringify(trackData));
+
     navigate("/apply/background");
   };
 
@@ -25,10 +32,22 @@ const TrackSelection: React.FC = () => {
     navigate("/");
   };
 
-  const handleTrackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTrack(e.target.value);
-    setError(""); // Clear error when user selects
-  };
+  React.useEffect(() => {
+    const savedTrackData = localStorage.getItem("trackData");
+    if (savedTrackData) {
+      const parsed = JSON.parse(savedTrackData);
+      setSelectedTrack(parsed.selected_track);
+    }
+  }, []);
+
+  // const handleTrackSelect = (value: string) => {
+  //   setSelectedTrack(value);
+  //   console.log("Selected track:", value);
+  //   localStorage.setItem("selectedTrack", value);
+  //   navigate("/background"); // assuming this goes to the form
+  // };
+
+  console.log("Selected track:", selectedTrack);
 
   return (
     <div className="application-form-container">
@@ -133,23 +152,15 @@ const TrackSelection: React.FC = () => {
           </div>
 
           <form className="form-fields">
-            <div className="form-field" style={{ width: "54.7vw" }}>
-              <select
-                value={selectedTrack}
-                onChange={handleTrackChange}
-                className={error ? "error" : ""}
-              >
-                <option value="">Select a track</option>
-                <option value="Product and Design Track">
-                  Product and Design Track
-                </option>
-                <option value="Engineering Track">Engineering Track</option>
-                <option value="Career & AI Productivity Track">
-                  Career & AI Productivity Track
-                </option>
-              </select>
-              {error && <div className="error-message">{error}</div>}
-            </div>
+            <StyledSelect
+              label=""
+              selectedKey={selectedTrack}
+              onSelectionChange={(key) => {
+                setSelectedTrack(key);
+                setError("");
+              }}
+              error={error}
+            />
 
             {selectedTrack && (
               <div className="track-description">
@@ -157,8 +168,6 @@ const TrackSelection: React.FC = () => {
                   "Design fintech products with AI research, compliance-first UX, and data-driven strategy"}
                 {selectedTrack === "Engineering Track" &&
                   "Build scalable fintech solutions with modern technologies and best practices"}
-                {selectedTrack === "Career & AI Productivity Track" &&
-                  "Leverage AI tools and strategies to accelerate your fintech career growth"}
               </div>
             )}
 

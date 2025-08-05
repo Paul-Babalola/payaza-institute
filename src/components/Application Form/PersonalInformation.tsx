@@ -39,7 +39,22 @@ const PersonalInformation: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
+      // Validate file size (2MB max)
+      if (file.size > 2 * 1024 * 1024) {
+        alert("File size must be less than 2MB");
+        return;
+      }
+
+      // Validate file type (PDF only)
+      if (file.type !== "application/pdf") {
+        alert("Only PDF files are allowed");
+        return;
+      }
+
       setFormData((prev) => ({ ...prev, resume: file }));
+
+      // Store file globally for access in other components
+      (window as any).resumeFile = file;
     }
   };
 
@@ -58,13 +73,24 @@ const PersonalInformation: React.FC = () => {
 
   const handleNext = () => {
     if (isFormValid) {
-      // Save to localStorage (or context/global state)
-      const { resume, ...rest } = formData;
-      localStorage.setItem("personalInformation", JSON.stringify(rest));
-      // Optionally save file name
-      if (resume) {
-        localStorage.setItem("resumeName", resume.name);
+      // Map field names to match API requirements
+      const apiFormData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phoneNumber, // phoneNumber -> phone
+        location: formData.location,
+        github_url: formData.githubUrl, // githubUrl -> github_url
+        portfolio_url: formData.portfolioUrl, // portfolioUrl -> portfolio_url
+      };
+
+      localStorage.setItem("personalInformation", JSON.stringify(apiFormData));
+
+      // Store resume filename for display purposes
+      if (formData.resume) {
+        localStorage.setItem("resumeName", formData.resume.name);
       }
+
       navigate("/apply/track-selection");
     }
   };

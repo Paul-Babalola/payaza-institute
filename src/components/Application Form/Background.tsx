@@ -1,58 +1,47 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ApplicationForm.css";
+import "../ui/StyledSelect";
 
 const Background: React.FC = () => {
-  // Load previous data
-  React.useEffect(() => {
-    // Load previous form data if available
-    const personalInfo = localStorage.getItem("personalInformation");
-    if (personalInfo) {
-      setFormData((prev) => ({ ...prev, ...JSON.parse(personalInfo) }));
-    }
-    // Load background data if available
-    const backgroundInfo = localStorage.getItem("backgroundInformation");
-    if (backgroundInfo) {
-      setFormData((prev) => ({ ...prev, ...JSON.parse(backgroundInfo) }));
-    }
-  }, []);
+  const [formData, setFormData] = useState({
+    currentPosition: "",
+    yearsOfExperience: "",
+    educationLevel: "",
+    fieldOfStudy: "",
+    currentCompany: "",
+    location: "",
+    technicalSkills: [] as string[],
+    tools: [] as string[],
+  });
+
+  const [selectedTrack, setSelectedTrack] = useState("Engineering Track");
+
   // Track-based skills and tools
   const trackSkills: { [key: string]: string[] } = {
     "Product and Design Track": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Figma",
+      "Adobe XD",
       "Wireframing",
       "Prototyping",
       "User Research",
       "UX Writing",
       "Design Systems",
-      "Figma",
-      "Adobe XD",
-      "Accessibility",
-      "Journey Mapping",
-      "Usability Testing",
     ],
     "Engineering Track": [
       "JavaScript",
       "TypeScript",
-      "React",
-      "Node.js",
       "Python",
-      "APIs",
-      "Docker",
-      "SQL",
-      "Git",
-      "Testing",
-    ],
-    "Career & AI Productivity Track": [
-      "Prompt Engineering",
-      "Notion",
-      "Automation",
-      "AI Research",
-      "Productivity Tools",
-      "ChatGPT",
-      "Google Workspace",
-      "LinkedIn Optimization",
-      "Time Management",
-      "Remote Collaboration",
+      "Java",
+      "Go",
+      "Rust",
+      "C++",
+      "PHP",
+      "Ruby",
+      "Swift",
     ],
   };
 
@@ -81,36 +70,64 @@ const Background: React.FC = () => {
       "Redis",
       "Linux",
     ],
-    "Career & AI Productivity Track": [
-      "Notion",
-      "Zapier",
-      "Google Workspace",
-      "Slack",
-      "Trello",
-      "Calendly",
-      "ChatGPT",
-      "LinkedIn",
-      "Airtable",
-      "Miro",
-    ],
   };
 
-  // Get selected track from localStorage (set in TrackSelection)
-  const selectedTrack =
-    localStorage.getItem("selectedTrack") || "Engineering Track";
-  // Compulsory fields: currentPosition, yearsOfExperience, educationLevel, fieldOfStudy, location
-  // ...existing code...
-  const [formData, setFormData] = useState({
-    currentPosition: "",
-    yearsOfExperience: "",
-    educationLevel: "",
-    fieldOfStudy: "",
-    currentCompany: "",
-    location: "",
-    technicalSkills: ["Java", "Python", "Javascript", "Github"] as string[],
-    tools: ["VS Code", "GitHub", "Postman", "Docker"] as string[],
-  });
+  // Load data on component mount
+  React.useEffect(() => {
+    // First, get the selected track
+    const trackData = localStorage.getItem("trackData");
+    if (trackData) {
+      try {
+        const parsed = JSON.parse(trackData);
+        const track =
+          parsed.selected_track || parsed.selectedTrack || "Engineering Track";
+        setSelectedTrack(track);
+        console.log("Loaded track:", track);
+      } catch (error) {
+        console.error("Error parsing track data:", error);
+      }
+    }
 
+    // Load personal information if available
+    const personalInfo = localStorage.getItem("personalInformation");
+    if (personalInfo) {
+      try {
+        const parsedPersonalInfo = JSON.parse(personalInfo);
+        setFormData((prev) => ({ ...prev, ...parsedPersonalInfo }));
+      } catch (error) {
+        console.error("Error parsing personal info:", error);
+      }
+    }
+
+    // Load background data if available
+    const backgroundInfo = localStorage.getItem("background");
+    if (backgroundInfo) {
+      try {
+        const parsedBackgroundInfo = JSON.parse(backgroundInfo);
+        setFormData((prev) => ({
+          ...prev,
+          currentPosition:
+            parsedBackgroundInfo.current_position || prev.currentPosition,
+          yearsOfExperience:
+            parsedBackgroundInfo.years_of_experience?.toString() ||
+            prev.yearsOfExperience,
+          educationLevel:
+            parsedBackgroundInfo.education_level || prev.educationLevel,
+          fieldOfStudy:
+            parsedBackgroundInfo.field_of_study || prev.fieldOfStudy,
+          currentCompany:
+            parsedBackgroundInfo.current_company || prev.currentCompany,
+          location: parsedBackgroundInfo.location || prev.location,
+          technicalSkills: parsedBackgroundInfo.technical_skills || [],
+          tools: parsedBackgroundInfo.tools || [],
+        }));
+      } catch (error) {
+        console.error("Error parsing background info:", error);
+      }
+    }
+  }, []);
+
+  // Form validation
   const isFormValid =
     formData.currentPosition.trim() !== "" &&
     formData.yearsOfExperience.trim() !== "" &&
@@ -119,6 +136,7 @@ const Background: React.FC = () => {
     formData.location.trim() !== "" &&
     formData.technicalSkills.length >= 1 &&
     formData.tools.length >= 1;
+
   const navigate = useNavigate();
 
   const handleInputChange = (
@@ -139,20 +157,52 @@ const Background: React.FC = () => {
   };
 
   const handleNext = () => {
-    // Save background data
-    localStorage.setItem("backgroundInformation", JSON.stringify(formData));
+    const apiFormData = {
+      current_position: formData.currentPosition,
+      years_of_experience: parseInt(formData.yearsOfExperience) || 0,
+      education_level: formData.educationLevel,
+      field_of_study: formData.fieldOfStudy,
+      current_company: formData.currentCompany,
+      location: formData.location,
+      technical_skills: formData.technicalSkills,
+      tools: formData.tools,
+    };
+
+    console.log("Saving background data:", apiFormData);
+    localStorage.setItem("background", JSON.stringify(apiFormData));
     navigate("/apply/motivation-goals");
   };
 
   const handlePrevious = () => {
-    // Save background data before going back
-    localStorage.setItem("backgroundInformation", JSON.stringify(formData));
+    // Save current form data before going back
+    const apiFormData = {
+      current_position: formData.currentPosition,
+      years_of_experience: parseInt(formData.yearsOfExperience) || 0,
+      education_level: formData.educationLevel,
+      field_of_study: formData.fieldOfStudy,
+      current_company: formData.currentCompany,
+      location: formData.location,
+      technical_skills: formData.technicalSkills,
+      tools: formData.tools,
+    };
+
+    localStorage.setItem("background", JSON.stringify(apiFormData));
     navigate("/apply/track-selection");
   };
 
   const handleExit = () => {
+    // Clear application data when exiting
+    localStorage.removeItem("background");
+    localStorage.removeItem("personalInformation");
+    localStorage.removeItem("trackData");
     navigate("/");
   };
+
+  // Get skills and tools for the current track
+  const currentTrackSkills =
+    trackSkills[selectedTrack] || trackSkills["Engineering Track"];
+  const currentTrackTools =
+    trackTools[selectedTrack] || trackTools["Engineering Track"];
 
   return (
     <div className="application-form-container">
@@ -192,7 +242,6 @@ const Background: React.FC = () => {
           </svg>
           <span className="exit-text hidden sm:inline">Exit Application</span>
         </div>
-        {/* <div className="separator hidden sm:block"></div> */}
         <div className="step-info md:justify-end">
           <div className="step-details">
             <div className="step-label">STEP 3/4</div>
@@ -252,7 +301,7 @@ const Background: React.FC = () => {
           <div className="form-section-header">
             <h2 className="section-title">Background</h2>
             <p className="section-subtitle">
-              Tell us a bit about your background
+              Tell us a bit about your background for the {selectedTrack}
             </p>
           </div>
 
@@ -336,10 +385,13 @@ const Background: React.FC = () => {
             <div className="form-field">
               <div className="technical-skills-container">
                 <div className="skills-label">
-                  <span className="skills-label-text">Technical Skills</span>
+                  <span className="skills-label-text">
+                    Technical Skills ({selectedTrack})
+                  </span>
                 </div>
                 <select
                   className="skills-select"
+                  value=""
                   onChange={(e) => {
                     if (
                       e.target.value &&
@@ -353,14 +405,10 @@ const Background: React.FC = () => {
                         ],
                       }));
                     }
-                    e.target.value = "";
                   }}
                 >
                   <option value="">Select a skill...</option>
-                  {(
-                    trackSkills[selectedTrack] ||
-                    trackSkills["Engineering Track"]
-                  ).map((skill) => (
+                  {currentTrackSkills.map((skill) => (
                     <option key={skill} value={skill}>
                       {skill}
                     </option>
@@ -401,10 +449,13 @@ const Background: React.FC = () => {
             <div className="form-field">
               <div className="technical-skills-container">
                 <div className="skills-label">
-                  <span className="skills-label-text">Tools</span>
+                  <span className="skills-label-text">
+                    Tools ({selectedTrack})
+                  </span>
                 </div>
                 <select
                   className="skills-select"
+                  value=""
                   onChange={(e) => {
                     if (
                       e.target.value &&
@@ -415,14 +466,11 @@ const Background: React.FC = () => {
                         tools: [...prev.tools, e.target.value],
                       }));
                     }
-                    e.target.value = "";
                   }}
                   style={{ width: "54.7vw" }}
                 >
                   <option value="">Select a tool...</option>
-                  {(
-                    trackTools[selectedTrack] || trackTools["Engineering Track"]
-                  ).map((tool) => (
+                  {currentTrackTools.map((tool) => (
                     <option key={tool} value={tool}>
                       {tool}
                     </option>

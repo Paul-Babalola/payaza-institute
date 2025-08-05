@@ -62,18 +62,128 @@ const MotivationGoals: React.FC = () => {
     }
   };
 
-  const handleSubmit = () => {
-    if (!isFormValid()) {
-      validateForm();
+  const handleSubmit = async () => {
+    // Save current form data first
+    localStorage.setItem(
+      "motivation",
+      JSON.stringify({
+        motivation_text: formData.motivation,
+        career_goals: formData.careerGoals,
+        why_fintech: formData.fintechInterest,
+      })
+    );
+
+    if (!validateForm()) {
       return;
     }
 
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+
+    try {
+      const personalInfo = JSON.parse(
+        localStorage.getItem("personalInformation") || "{}"
+      );
+      const trackSelection = JSON.parse(
+        localStorage.getItem("trackSelection") || "{}"
+      );
+      const background = JSON.parse(localStorage.getItem("background") || "{}");
+      const motivation = JSON.parse(localStorage.getItem("motivation") || "{}");
+
+      const resumeFile = (window as any).resumeFile;
+
+      if (!resumeFile) {
+        alert(
+          "Resume file is missing. Please go back and re-upload your resume."
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      const apiFormData = new FormData();
+
+      // Personal Information (fields already mapped correctly)
+      apiFormData.append("email", personalInfo.email || "");
+      apiFormData.append("firstname", personalInfo.firstName || "");
+      apiFormData.append("lastname", personalInfo.lastName || "");
+      apiFormData.append("phone", personalInfo.phone || "");
+      apiFormData.append("location", personalInfo.location || "");
+      apiFormData.append("linkedin_url", ""); // Not collected in your form
+      apiFormData.append("github_url", personalInfo.github_url || "");
+      apiFormData.append("portfolio_url", personalInfo.portfolio_url || "");
+
+      // Track Selection (field already mapped correctly)
+      apiFormData.append("selected_track", trackSelection.selected_track || "");
+
+      // Background Information (fields already mapped correctly)
+      apiFormData.append("current_position", background.current_position || "");
+      apiFormData.append(
+        "years_of_experience",
+        background.years_of_experience?.toString() || "0"
+      );
+      apiFormData.append("education_level", background.education_level || "");
+      apiFormData.append("current_company", background.current_company || "");
+      apiFormData.append("field_of_study", background.field_of_study || "");
+
+      // Arrays - Map technical_skills to programming_languages
+      if (
+        background.technical_skills &&
+        Array.isArray(background.technical_skills)
+      ) {
+        background.technical_skills.forEach((skill: string) => {
+          apiFormData.append("programming_languages[]", skill);
+        });
+      }
+
+      // Empty technical_skills array (since API expects it)
+      apiFormData.append("technical_skills[]", "");
+
+      if (background.tools && Array.isArray(background.tools)) {
+        background.tools.forEach((tool: string) => {
+          apiFormData.append("tools[]", tool);
+        });
+      }
+
+      // Motivation & Goals (fields already mapped correctly)
+      apiFormData.append("motivation_text", motivation.motivation_text || "");
+      apiFormData.append("career_goals", motivation.career_goals || "");
+      apiFormData.append("why_fintech", motivation.why_fintech || "");
+
+      // Resume file
+      apiFormData.append("resume", resumeFile);
+
+      // Submit to API
+      const response = await fetch(
+        "https://institute.dev.payaza.africa/applications",
+        {
+          method: "POST",
+          body: apiFormData,
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Application submitted successfully:", result);
+
+        // Clear localStorage
+        localStorage.removeItem("personalInformation");
+        localStorage.removeItem("trackSelection");
+        localStorage.removeItem("background");
+        localStorage.removeItem("motivation");
+        localStorage.removeItem("resumeName");
+        delete (window as any).resumeFile;
+
+        navigate("/apply/submitted");
+      } else {
+        const errorData = await response.json();
+        console.error("Submission failed:", errorData);
+        alert(`Submission failed: ${errorData.message || "Please try again"}`);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Network error. Please check your connection and try again.");
+    } finally {
       setIsSubmitting(false);
-      navigate("/apply/submitted");
-    }, 2000);
+    }
   };
 
   const handlePrevious = () => {
