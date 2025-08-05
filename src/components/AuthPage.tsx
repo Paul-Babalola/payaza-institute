@@ -422,7 +422,7 @@ const AuthPage: React.FC = () => {
             mb: 1,
           }}
         >
-          Welcome Back
+          Welcome to Payaza Institute!
         </Typography>
 
         <Typography
