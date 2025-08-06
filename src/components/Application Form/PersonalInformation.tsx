@@ -80,8 +80,8 @@ const PersonalInformation: React.FC = () => {
         email: formData.email,
         phone: formData.phoneNumber, // phoneNumber -> phone
         location: formData.location,
-        github_url: formData.githubUrl, // githubUrl -> github_url
-        portfolio_url: formData.portfolioUrl, // portfolioUrl -> portfolio_url
+        github_url: formData.githubUrl || "null", // githubUrl -> github_url
+        portfolio_url: formData.portfolioUrl || "null", // portfolioUrl -> portfolio_url
       };
 
       localStorage.setItem("personalInformation", JSON.stringify(apiFormData));

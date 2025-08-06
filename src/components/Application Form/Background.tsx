@@ -194,7 +194,7 @@ const Background: React.FC = () => {
       years_of_experience: parseInt(formData.yearsOfExperience) || 0,
       education_level: formData.educationLevel,
       field_of_study: formData.fieldOfStudy,
-      current_company: formData.currentCompany,
+      current_company: formData.currentCompany || "null",
       location: formData.location,
       technical_skills: formData.technicalSkills,
       tools: formData.tools,

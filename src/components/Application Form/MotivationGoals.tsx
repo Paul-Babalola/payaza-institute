@@ -83,9 +83,11 @@ const MotivationGoals: React.FC = () => {
       const personalInfo = JSON.parse(
         localStorage.getItem("personalInformation") || "{}"
       );
-      const trackSelection = JSON.parse(
-        localStorage.getItem("trackSelection") || "{}"
-      );
+      // const trackSelection = JSON.parse(
+      //   localStorage.getItem("trackSelection") || "{}"
+      // );
+      const trackData = JSON.parse(localStorage.getItem("trackData") || "{}");
+
       const background = JSON.parse(localStorage.getItem("background") || "{}");
       const motivation = JSON.parse(localStorage.getItem("motivation") || "{}");
 
@@ -112,8 +114,7 @@ const MotivationGoals: React.FC = () => {
       apiFormData.append("portfolio_url", personalInfo.portfolio_url || "");
 
       // Track Selection (field already mapped correctly)
-      apiFormData.append("selected_track", trackSelection.selected_track || "");
-
+      apiFormData.append("selected_track", trackData.selected_track || "");
       // Background Information (fields already mapped correctly)
       apiFormData.append("current_position", background.current_position || "");
       apiFormData.append(
@@ -125,17 +126,23 @@ const MotivationGoals: React.FC = () => {
       apiFormData.append("field_of_study", background.field_of_study || "");
 
       // Arrays - Map technical_skills to programming_languages
+      // if (
+      //   background.technical_skills &&
+      //   Array.isArray(background.technical_skills)
+      // ) {
+      //   background.technical_skills.forEach((skill: string) => {
+      //     apiFormData.append("programming_languages[]", skill);
+      //   });
+      // }
+
       if (
         background.technical_skills &&
         Array.isArray(background.technical_skills)
       ) {
         background.technical_skills.forEach((skill: string) => {
-          apiFormData.append("programming_languages[]", skill);
+          apiFormData.append("technical_skills[]", skill);
         });
       }
-
-      // Empty technical_skills array (since API expects it)
-      apiFormData.append("technical_skills[]", "");
 
       if (background.tools && Array.isArray(background.tools)) {
         background.tools.forEach((tool: string) => {
