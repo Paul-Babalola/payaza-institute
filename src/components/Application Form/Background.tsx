@@ -10,7 +10,7 @@ const Background: React.FC = () => {
     yearsOfExperience: "",
     educationLevel: "",
     fieldOfStudy: "",
-    currentCompany: "",
+    currentCompany: "mm",
     location: "",
     technicalSkills: [] as string[],
     tools: [] as string[],
@@ -20,7 +20,7 @@ const Background: React.FC = () => {
 
   // Track-based skills and tools
   const trackSkills: { [key: string]: string[] } = {
-    "Product and Design Track": [
+    product: [
       "HTML",
       "CSS",
       "JavaScript",
@@ -32,7 +32,7 @@ const Background: React.FC = () => {
       "UX Writing",
       "Design Systems",
     ],
-    "Engineering Track": [
+    engineering: [
       "JavaScript",
       "TypeScript",
       "Python",
@@ -47,7 +47,7 @@ const Background: React.FC = () => {
   };
 
   const trackTools: { [key: string]: string[] } = {
-    "Product and Design Track": [
+    product: [
       "Figma",
       "Adobe XD",
       "Sketch",
@@ -59,7 +59,7 @@ const Background: React.FC = () => {
       "Maze",
       "Balsamiq",
     ],
-    "Engineering Track": [
+    engineering: [
       "VS Code",
       "GitHub",
       "Postman",
@@ -194,7 +194,7 @@ const Background: React.FC = () => {
       years_of_experience: parseInt(formData.yearsOfExperience) || 0,
       education_level: formData.educationLevel,
       field_of_study: formData.fieldOfStudy,
-      current_company: formData.currentCompany || "null",
+      current_company: formData.currentCompany,
       location: formData.location,
       technical_skills: formData.technicalSkills,
       tools: formData.tools,
@@ -232,9 +232,9 @@ const Background: React.FC = () => {
 
   // Get skills and tools for the current track
   const currentTrackSkills =
-    trackSkills[selectedTrack] || trackSkills["Engineering Track"];
+    trackSkills[selectedTrack] || trackSkills["engineering"];
   const currentTrackTools =
-    trackTools[selectedTrack] || trackTools["Engineering Track"];
+    trackTools[selectedTrack] || trackTools["engineering"];
 
   // Convert skills and tools to options format
   const skillOptions = currentTrackSkills.map((skill) => ({

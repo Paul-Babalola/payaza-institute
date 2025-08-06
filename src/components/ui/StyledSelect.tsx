@@ -21,8 +21,8 @@ interface StyledSelectProps {
 }
 
 const defaultTracks: SelectOption[] = [
-  { key: "Product and Design Track", name: "Product and Design Track" },
-  { key: "Engineering Track", name: "Engineering Track" },
+  { key: "product", name: "Product and Design Track" },
+  { key: "engineering", name: "Engineering Track" },
   // { key: "career", name: "Career & AI Productivity Track" },
 ];
 

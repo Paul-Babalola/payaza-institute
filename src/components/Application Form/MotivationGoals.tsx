@@ -63,6 +63,10 @@ const MotivationGoals: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
     // Save current form data first
     localStorage.setItem(
       "motivation",
@@ -73,23 +77,27 @@ const MotivationGoals: React.FC = () => {
       })
     );
 
-    if (!validateForm()) {
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-      const personalInfo = JSON.parse(
-        localStorage.getItem("personalInformation") || "{}"
-      );
-      // const trackSelection = JSON.parse(
-      //   localStorage.getItem("trackSelection") || "{}"
-      // );
-      const trackData = JSON.parse(localStorage.getItem("trackData") || "{}");
+      // Safe localStorage parsing with better error handling
+      const safeParseLocalStorage = (key: string, fallback = {}) => {
+        try {
+          const item = localStorage.getItem(key);
+          if (!item || item === "undefined" || item === "null") {
+            return fallback;
+          }
+          return JSON.parse(item);
+        } catch (error) {
+          console.warn(`Failed to parse localStorage item "${key}":`, error);
+          return fallback;
+        }
+      };
 
-      const background = JSON.parse(localStorage.getItem("background") || "{}");
-      const motivation = JSON.parse(localStorage.getItem("motivation") || "{}");
+      const personalInfo = safeParseLocalStorage("personalInformation", {});
+      const trackData = safeParseLocalStorage("trackData", {});
+      const background = safeParseLocalStorage("background", {});
+      const motivation = safeParseLocalStorage("motivation", {});
 
       const resumeFile = (window as any).resumeFile;
 
@@ -103,54 +111,38 @@ const MotivationGoals: React.FC = () => {
 
       const apiFormData = new FormData();
 
-      // Personal Information (fields already mapped correctly)
+      // Personal Information - with null checks
       apiFormData.append("email", personalInfo.email || "");
       apiFormData.append("firstname", personalInfo.firstName || "");
       apiFormData.append("lastname", personalInfo.lastName || "");
       apiFormData.append("phone", personalInfo.phone || "");
       apiFormData.append("location", personalInfo.location || "");
-      apiFormData.append("linkedin_url", ""); // Not collected in your form
-      apiFormData.append("github_url", personalInfo.github_url || "");
-      apiFormData.append("portfolio_url", personalInfo.portfolio_url || "");
+      // apiFormData.append("github_url", personalInfo?.github_url || "");
+      // apiFormData.append("portfolio_url", personalInfo?.portfolio_url || "");
 
-      // Track Selection (field already mapped correctly)
+      // Track Selection
       apiFormData.append("selected_track", trackData.selected_track || "");
-      // Background Information (fields already mapped correctly)
+
+      // Background Information
       apiFormData.append("current_position", background.current_position || "");
       apiFormData.append(
         "years_of_experience",
-        background.years_of_experience?.toString() || "0"
+        (background.years_of_experience || 0).toString()
       );
       apiFormData.append("education_level", background.education_level || "");
-      apiFormData.append("current_company", background.current_company || "");
+      // apiFormData.append("current_company", background?.current_company || "");
       apiFormData.append("field_of_study", background.field_of_study || "");
 
-      // Arrays - Map technical_skills to programming_languages
-      // if (
-      //   background.technical_skills &&
-      //   Array.isArray(background.technical_skills)
-      // ) {
-      //   background.technical_skills.forEach((skill: string) => {
-      //     apiFormData.append("programming_languages[]", skill);
-      //   });
-      // }
+      // Arrays - ensure they're valid arrays before stringifying
+      const technicalSkills = Array.isArray(background.technical_skills)
+        ? background.technical_skills
+        : [];
+      apiFormData.append("technical_skills", JSON.stringify(technicalSkills));
 
-      if (
-        background.technical_skills &&
-        Array.isArray(background.technical_skills)
-      ) {
-        background.technical_skills.forEach((skill: string) => {
-          apiFormData.append("technical_skills[]", skill);
-        });
-      }
+      const tools = Array.isArray(background.tools) ? background.tools : [];
+      apiFormData.append("tools", JSON.stringify(tools));
 
-      if (background.tools && Array.isArray(background.tools)) {
-        background.tools.forEach((tool: string) => {
-          apiFormData.append("tools[]", tool);
-        });
-      }
-
-      // Motivation & Goals (fields already mapped correctly)
+      // Motivation & Goals
       apiFormData.append("motivation_text", motivation.motivation_text || "");
       apiFormData.append("career_goals", motivation.career_goals || "");
       apiFormData.append("why_fintech", motivation.why_fintech || "");
@@ -158,7 +150,38 @@ const MotivationGoals: React.FC = () => {
       // Resume file
       apiFormData.append("resume", resumeFile);
 
+      // Debug: Log what we're sending
+      console.log("Sending form data:");
+      for (let pair of apiFormData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+
+      // console.log("Log data:", apiF
+      // ormData);
       // Submit to API
+
+      // const payload: { [key: string]: any } = {
+      //   email: "chibuikeuko@gmail.com",
+      //   firstname: "Chibuike",
+      //   lastname: "Uko",
+      //   phone: "07064726898",
+      //   location: "Lagos",
+      //   // linkedin_url: "https://linkedin/chibuike",
+      //   github_url: "https://www.github.com/malachi43",
+      //   selected_track: "engineering",
+      //   current_position: "backend engineering",
+      //   years_of_experience: 2,
+      //   education_level: "Bachelor in Engineering",
+      //   current_company: "Payaza",
+      //   motivation_text: "If you can think it you can do it",
+      //   career_goals: "be one the best in my field",
+      //   why_fintech: "To learn financial discipline",
+      //   field_of_study: "Electronic and Computer Engineering",
+      //   programming_languages: ["javascript", "java"],
+      //   technical_skills: ["critical thinkking"],
+      //   tools: ["git", "github"],
+      // };
+
       const response = await fetch(
         "https://institute.dev.payaza.africa/applications",
         {
@@ -174,6 +197,7 @@ const MotivationGoals: React.FC = () => {
         // Clear localStorage
         localStorage.removeItem("personalInformation");
         localStorage.removeItem("trackSelection");
+        localStorage.removeItem("trackData");
         localStorage.removeItem("background");
         localStorage.removeItem("motivation");
         localStorage.removeItem("resumeName");

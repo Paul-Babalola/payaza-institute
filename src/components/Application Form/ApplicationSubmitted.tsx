@@ -90,6 +90,9 @@ const ApplicationSubmitted: React.FC = () => {
         </div>
       </div>
 
+      <br />
+      <br />
+
       <div className="submission-content">
         {/* Success Message */}
         <div className="success-message">

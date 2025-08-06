@@ -164,9 +164,9 @@ const TrackSelection: React.FC = () => {
 
             {selectedTrack && (
               <div className="track-description">
-                {selectedTrack === "Product and Design Track" &&
+                {selectedTrack === "product" &&
                   "Design fintech products with AI research, compliance-first UX, and data-driven strategy"}
-                {selectedTrack === "Engineering Track" &&
+                {selectedTrack === "engineering" &&
                   "Build scalable fintech solutions with modern technologies and best practices"}
               </div>
             )}
